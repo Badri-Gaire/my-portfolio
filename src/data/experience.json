@@ -1,0 +1,14 @@
+[
+    {
+        "role": "Junior Frontend Developer",
+        "company": "Tech Corp",
+        "period": "2022 - Present",
+        "description": "Leading the frontend team and building scalable web applications."
+    },
+    {
+        "role": "Web Developer",
+        "company": "StartUp Inc",
+        "period": "2020 - 2022",
+        "description": "Developed and maintained multiple client websites using React ,Nextjs and Astro"
+    }
+]

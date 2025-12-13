@@ -3,12 +3,13 @@ import Container from "../../shared/Container.astro";
 
 interface Props {
   className?: string;
+  id?: string;
 }
 
-const { className = "" } = Astro.props;
+const { className = "", id } = Astro.props;
 ---
 
-<section class={`py-12 md:py-20 ${className}`}>
+<section id={id} class={`py-12 md:py-20 ${className}`}>
   <Container>
     <slot />
   </Container>

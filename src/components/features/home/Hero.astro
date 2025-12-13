@@ -1,0 +1,68 @@
+---
+import SectionWrapper from "../../ui/section/SectionWrapper.astro";
+import Button from "../../ui/buttons/Button.astro";
+import SocialLinks from "../../shared/SocialLinks.astro";
+import userData from "../../../data/user.json";
+
+const { name, role, summary } = userData;
+---
+
+<SectionWrapper
+    className="py-20 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-80px)]"
+    id="home"
+>
+    <div class="flex flex-col md:flex-row items-center gap-12 w-full">
+        <div class="flex-1 space-y-6 animate-on-load opacity-0 translate-y-4">
+            <h1
+                class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500 uppercase tracking-tight"
+            >
+                Hi, I'm {name}
+            </h1>
+            <h2
+                class="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-200"
+            >
+                {role}
+            </h2>
+            <p
+                class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl"
+            >
+                {summary}
+            </p>
+            <div class="flex gap-4 pt-4">
+                <Button href="#projects">View Projects</Button>
+                <Button href="/contact" variant="outline">Contact Me</Button>
+            </div>
+            <div class="pt-4">
+                <SocialLinks />
+            </div>
+        </div>
+
+        <div
+            class="flex-1 flex justify-center animate-on-load opacity-0 translate-y-4"
+            style="transition-delay: 10ms;"
+        >
+            <div
+                class="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-tr from-primary/20 via-primary/5 to-transparent p-2 relative group"
+            >
+                <div
+                    class="absolute inset-0 rounded-full border-2 border-primary/20 group-hover:border-primary/50 transition-colors duration-500"
+                >
+                </div>
+                <div
+                    class="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-2xl relative z-10 bg-white dark:bg-gray-900"
+                >
+                    <img
+                        src="/images/badri2.webp"
+                        alt={name}
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                </div>
+                <!-- Decorative blurred glow -->
+                <div
+                    class="absolute -inset-4 bg-primary/20 blur-3xl rounded-full -z-10 opacity-50 group-hover:opacity-75 transition-opacity duration-500"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</SectionWrapper>

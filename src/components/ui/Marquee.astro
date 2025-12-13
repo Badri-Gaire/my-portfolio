@@ -1,0 +1,54 @@
+---
+interface Props {
+    className?: string;
+    reverse?: boolean;
+    pauseOnHover?: boolean;
+}
+
+const { className = "", reverse = false, pauseOnHover = false } = Astro.props;
+---
+
+<div
+    class={`group flex overflow-hidden p-2 [--gap:1rem] [gap:var(--gap)] ${className} ${
+        pauseOnHover ? "pause-on-hover" : ""
+    }`}
+>
+    <div
+        class={`flex shrink-0 justify-around [gap:var(--gap)] min-w-full animate-marquee ${
+            reverse ? "direction-reverse" : ""
+        }`}
+    >
+        <slot />
+    </div>
+    <div
+        aria-hidden="true"
+        class={`flex shrink-0 justify-around [gap:var(--gap)] min-w-full animate-marquee ${
+            reverse ? "direction-reverse" : ""
+        }`}
+    >
+        <slot />
+    </div>
+</div>
+
+<style>
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(calc(-100% - var(--gap)));
+        }
+    }
+
+    .animate-marquee {
+        animation: marquee var(--duration, 10s) linear infinite;
+    }
+
+    .direction-reverse {
+        animation-direction: reverse;
+    }
+
+    .group.pause-on-hover:hover .animate-marquee {
+        animation-play-state: paused;
+    }
+</style>

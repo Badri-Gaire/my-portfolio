@@ -1,0 +1,22 @@
+---
+import SectionWrapper from "../../ui/section/SectionWrapper.astro";
+import SectionHeading from "../../ui/section/SectionHeading.astro";
+import ProjectCard from "../../ui/cards/ProjectCard.astro";
+import projectsData from "../../../data/projects.json";
+---
+
+<SectionWrapper id="projects" className="py-20">
+    <SectionHeading title="Featured Projects" className="mb-12" />
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+            projectsData.map((project, index) => (
+                <div
+                    class="animate-on-scroll opacity-0 translate-y-8"
+                    style={`transition-delay: ${index * 100}ms`}
+                >
+                    <ProjectCard {...project} />
+                </div>
+            ))
+        }
+    </div>
+</SectionWrapper>
