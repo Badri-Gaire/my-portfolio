@@ -9,15 +9,19 @@ import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
 }
 
-const { title = siteConfig.title, description = siteConfig.description } =
-	Astro.props;
+const {
+	title = siteConfig.title,
+	description = siteConfig.description,
+	image,
+} = Astro.props;
 ---
 
 <html lang={siteConfig.lang}>
 	<head>
-		<Seo title={title} description={description} />
+		<Seo title={title} description={description} image={image} />
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/webp" href="/images/badri2.webp" />
 		<meta name="viewport" content="width=device-width" />
