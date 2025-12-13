@@ -1,6 +1,9 @@
 ---
 import SectionWrapper from "../../ui/section/SectionWrapper.astro";
 import Button from "../../ui/buttons/Button.astro";
+import JellyButton from "../../ui/buttons/JellyButton";
+import StormToggle from "../../ui/buttons/StormToggle";
+import JellyBackground from "../../ui/backgrounds/JellyBackground";
 import SocialLinks from "../../shared/SocialLinks.astro";
 import { Zap } from "lucide-react";
 import userData from "../../../data/user.json";
@@ -9,10 +12,15 @@ const { name, role, summary } = userData;
 ---
 
 <SectionWrapper
-    className="py-20 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden"
+    className="py-20 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden relative"
     id="home"
 >
-    <div class="flex flex-col md:flex-row items-center gap-12 w-full z-10">
+    <!-- Interactive Jelly Background -->
+    <JellyBackground client:load />
+
+    <div
+        class="flex flex-col md:flex-row items-center gap-12 w-full z-10 relative"
+    >
         <div class="flex-1 space-y-6">
             <h1
                 class="text-4xl md:text-6xl font-bold uppercase tracking-tight overflow-hidden"
@@ -47,18 +55,13 @@ const { name, role, summary } = userData;
                 {summary}
             </p>
             <div class="flex gap-4 pt-4 animate-fade-in opacity-0">
-                <Button href="#projects">View Projects</Button>
-                <Button href="/contact" variant="outline">Contact Me</Button>
-
-                <!-- Dedicated Storm Toggle -->
-                <button
-                    id="storm-toggle"
-                    class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-yellow-100 dark:hover:bg-yellow-900/30 text-yellow-500 transition-all active:scale-95 group/btn"
-                    aria-label="Trigger Lightning"
-                    title="Activate Storm Mode"
+                <JellyButton client:load href="#projects"
+                    >View Projects</JellyButton
                 >
-                    <Zap className="size-5" />
-                </button>
+                <JellyButton client:load href="/contact" variant="outline"
+                    >Contact Me</JellyButton
+                >
+                <StormToggle client:load />
             </div>
             <div class="pt-4 animate-fade-in opacity-0">
                 <SocialLinks />
@@ -233,8 +236,13 @@ const { name, role, summary } = userData;
         }
     };
 
-    // Toggle Button Click Listener (The ONLY trigger)
+    // Toggle Button Click Listener (supports both old and new storm toggle)
     stormToggle?.addEventListener("click", () => {
+        triggerLightning();
+    });
+
+    // Listen for custom event from React component
+    window.addEventListener("storm-toggle", () => {
         triggerLightning();
     });
 </script>

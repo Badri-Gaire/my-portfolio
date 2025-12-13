@@ -6,8 +6,23 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.badrigaire.com.np',
-  integrations: [sitemap(), react()],
+  integrations: [
+    sitemap(),
+    react()
+  ],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      cssCodeSplit: true,
+      minify: 'esbuild',
+    }
+  },
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport'
   }
 });

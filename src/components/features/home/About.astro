@@ -2,53 +2,71 @@
 import SectionWrapper from "../../ui/section/SectionWrapper.astro";
 import SectionHeading from "../../ui/section/SectionHeading.astro";
 import userData from "../../../data/user.json";
-import experienceData from "../../../data/experience.json";
 
 const { description, traits } = userData;
 ---
 
-<SectionWrapper id="about" className="bg-gray-50 dark:bg-gray-800/50 py-20">
-    <div class="flex flex-col md:flex-row gap-16">
-        <div class="flex-1 animate-on-scroll opacity-0 translate-y-8">
-            <SectionHeading title="About Me" />
+<SectionWrapper id="about" className="py-20 md:py-32 relative overflow-hidden">
+    <!-- Animated gradient background -->
+    <div
+        class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-pink-50/50 dark:from-blue-950/20 dark:via-purple-950/10 dark:to-pink-950/20"
+    >
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <!-- Title -->
+            <div class="text-center mb-12">
+                <SectionHeading title="About Me" />
+                <div
+                    class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"
+                >
+                </div>
+            </div>
+
+            <!-- Description -->
             <p
-                class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6 font-light"
+                class="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8 font-light text-center"
             >
                 {description}
             </p>
-            <div class="flex flex-wrap gap-3 mb-8">
+
+            <!-- Traits -->
+            <div class="flex flex-wrap justify-center gap-3">
                 {
                     traits.map((trait) => (
-                        <span class="px-4 py-2 bg-white dark:bg-gray-800 border border-primary/10 text-primary rounded-full text-sm font-medium shadow-sm">
+                        <span class="px-6 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border-2 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 rounded-full text-sm font-semibold transition-all hover:scale-110 hover:shadow-lg hover:border-blue-400 dark:hover:border-blue-600 cursor-default">
                             {trait}
                         </span>
                     ))
                 }
             </div>
         </div>
-
-        <div class="flex-1 animate-on-scroll opacity-0 translate-y-8">
-            <SectionHeading title="Experience" />
-            <div class="space-y-12">
-                {
-                    experienceData.map((item) => (
-                        <div class="relative pl-8 border-l-2 border-primary/20">
-                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-4 border-primary" />
-                            <h3 class="font-bold text-xl mb-1 text-gray-900 dark:text-white">
-                                {item.role}
-                            </h3>
-                            <div class="mb-3 flex flex-wrap gap-x-4 text-sm text-gray-600 dark:text-gray-400 font-medium">
-                                <span class="text-primary">{item.company}</span>
-                                <span>•</span>
-                                <span>{item.period}</span>
-                            </div>
-                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                                {item.description}
-                            </p>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
     </div>
 </SectionWrapper>
+
+<style>
+    /* Smooth fade-in animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    #about > div > div > div {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    #about p {
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    #about span {
+        animation: fadeInUp 0.5s ease-out calc(0.4s + var(--delay, 0s)) both;
+    }
+</style>
