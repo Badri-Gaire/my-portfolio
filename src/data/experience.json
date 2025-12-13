@@ -1,14 +1,40 @@
 [
     {
-        "role": "Junior Frontend Developer",
-        "company": "Tech Corp",
-        "period": "2022 - Present",
-        "description": "Leading the frontend team and building scalable web applications."
-    },
-    {
-        "role": "Web Developer",
-        "company": "StartUp Inc",
-        "period": "2020 - 2022",
-        "description": "Developed and maintained multiple client websites using React ,Nextjs and Astro"
+        "company": "EwanByte",
+        "location": "Rupandehi District, Lumbini, Nepal",
+        "totalDuration": "1 yr 2 mos",
+        "logo": "/images/experience/ewanbyte_logo.webp",
+        "roles": [
+            {
+                "title": "Frontend Developer",
+                "type": "Full-time",
+                "start": "Feb 2025",
+                "end": "Present",
+                "duration": "11 mos",
+                "locationType": "Hybrid",
+                "skills": [
+                    "Nextjs",
+                    "Astro",
+                    "TypeScript",
+                    "Tailwind CSS",
+                    "Redux"
+                ]
+            },
+            {
+                "title": "Frontend Developer Intern",
+                "type": "Internship",
+                "start": "Nov 2024",
+                "end": "Feb 2025",
+                "duration": "4 mos",
+                "locationType": "Remote",
+                "skills": [
+                    "Nextjs",
+                    "reactjs",
+                    "JavaScript",
+                    "HTML",
+                    "CSS"
+                ]
+            }
+        ]
     }
 ]
