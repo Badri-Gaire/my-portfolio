@@ -1,21 +1,136 @@
 ---
 import { menuLinks } from "../../utils/siteConfig";
 import ThemeToggle from "../shared/ThemeToggle.astro";
-
+import { Menu, X } from "lucide-react";
 ---
 
-<header class="py-4 border-b border-gray-100 dark:border-gray-800">
-  <div class="container mx-auto px-4 flex justify-between items-center">
-    <a href="/" class="text-xl font-bold">Portfolio</a>
+<header
+  class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800"
+>
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="/" class="text-xl font-bold z-50 relative">Portfolio</a>
+
+    <!-- Desktop Navigation -->
     <nav class="hidden md:flex gap-6 items-center">
       {
         menuLinks.map((link) => (
-          <a href={link.path} class="hover:text-primary transition-colors">
+          <a
+            href={link.path}
+            class="hover:text-primary transition-colors text-sm font-medium"
+          >
             {link.title}
           </a>
         ))
       }
       <ThemeToggle />
     </nav>
+
+    <!-- Mobile Navigation Controls -->
+    <div class="flex items-center gap-4 md:hidden">
+      <ThemeToggle />
+      <button
+        id="menu-toggle"
+        class="relative z-50 p-2 -mr-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors focus:outline-none"
+        aria-label="Toggle Menu"
+      >
+        <div id="menu-icon-open" class="block">
+          <Menu className="size-6" client:load />
+        </div>
+        <div id="menu-icon-close" class="hidden">
+          <X className="size-6" client:load />
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-x-0 top-[60px] bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-xl md:hidden opacity-0 invisible"
+  >
+    <nav class="container mx-auto px-4 py-6 flex flex-col gap-4">
+      {
+        menuLinks.map((link) => (
+          <a
+            href={link.path}
+            class="mobile-link text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-primary py-2 border-b border-gray-50 dark:border-gray-800 last:border-none"
+          >
+            {link.title}
+          </a>
+        ))
+      }
+    </nav>
   </div>
 </header>
+
+<!-- Spacer for fixed header -->
+<div class="h-[60px]"></div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("menu-icon-open");
+  const iconClose = document.getElementById("menu-icon-close");
+  const mobileLinks = document.querySelectorAll(".mobile-link");
+
+  let isMenuOpen = false;
+
+  const toggleMenu = () => {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      // Open Menu
+      iconOpen?.classList.add("hidden");
+      iconClose?.classList.remove("hidden");
+
+      gsap.to(mobileMenu, {
+        duration: 0.3,
+        autoAlpha: 1, // handles opacity and visibility
+        y: 0,
+        ease: "power2.out",
+        display: "block",
+      });
+
+      gsap.fromTo(
+        mobileLinks,
+        { y: -10, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.05,
+          duration: 0.3,
+          delay: 0.1,
+        },
+      );
+    } else {
+      // Close Menu
+      iconOpen?.classList.remove("hidden");
+      iconClose?.classList.add("hidden");
+
+      gsap.to(mobileMenu, {
+        duration: 0.2,
+        autoAlpha: 0,
+        y: -10,
+        ease: "power2.in",
+      });
+    }
+  };
+
+  menuToggle?.addEventListener("click", toggleMenu);
+
+  // Close menu when a link is clicked
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (isMenuOpen) toggleMenu();
+    });
+  });
+
+  // Handle resize to reset state if moving to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && isMenuOpen) {
+      toggleMenu();
+    }
+  });
+</script>
