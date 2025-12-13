@@ -20,14 +20,7 @@ import Projects from "../components/features/home/Projects.astro";
 
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  // Hero animations
-  gsap.to(".animate-on-load", {
-    y: 0,
-    opacity: 1,
-    duration: 1,
-    stagger: 0.2,
-    ease: "power3.out",
-  });
+  // Hero animations are now handled within the Hero component
 
   // Scroll animations
   const animateElements = document.querySelectorAll(".animate-on-scroll");
