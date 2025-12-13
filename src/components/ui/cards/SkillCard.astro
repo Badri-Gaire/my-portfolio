@@ -1,0 +1,23 @@
+---
+interface Props {
+  name: string;
+  icon?: string;
+}
+
+const { name, icon } = Astro.props;
+const isIconUrl = icon?.startsWith("http") || icon?.startsWith("/");
+---
+
+<div
+  class="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
+>
+  {
+    icon &&
+      (isIconUrl ? (
+        <img src={icon} alt={name} class="w-8 h-8" />
+      ) : (
+        <span class="text-2xl">{icon}</span>
+      ))
+  }
+  <span class="font-medium">{name}</span>
+</div>

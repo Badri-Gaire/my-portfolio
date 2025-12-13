@@ -1,0 +1,20 @@
+yarn run v1.22.22
+warning package.json: No license field
+$ astro build
+[2m10:38:47[22m [34m[content][39m Syncing content
+[2m10:38:47[22m [34m[content][39m Synced content
+[2m10:38:47[22m [34m[types][39m Generated [2m418ms[22m
+[2m10:38:47[22m [34m[build][39m output: [34m"static"[39m
+[2m10:38:47[22m [34m[build][39m mode: [34m"static"[39m
+[2m10:38:47[22m [34m[build][39m directory: [34mC:\Users\Lenovo\Desktop\Practice-projects\badri-portfolio\my-astro-portfolio\dist\[39m
+[2m10:38:47[22m [34m[build][39m Collecting build info...
+[2m10:38:47[22m [34m[build][39m [32m✓ Completed in 434ms.[39m
+[2m10:38:47[22m [34m[build][39m Building static entrypoints...
+[31m[1m10:38:47[22m [ERROR] [vite][39m [31m✗[39m Build failed in 467ms
+Could not resolve "../BaseLayout.astro" from "src/layouts/BlogLayout.astro"
+file: C:/Users/Lenovo/Desktop/Practice-projects/badri-portfolio/my-astro-portfolio/src/layouts/BlogLayout.astro
+  [1mStack trace:[22m
+[2m    at getRollupError (file:///C:/Users/Lenovo/Desktop/Practice-projects/badri-portfolio/my-astro-portfolio/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at ModuleLoader.handleInvalidResolvedId (file:///C:/Users/Lenovo/Desktop/Practice-projects/badri-portfolio/my-astro-portfolio/node_modules/rollup/dist/es/shared/node-entry.js:21590:24)[22m
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

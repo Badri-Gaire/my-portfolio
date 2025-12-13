@@ -1,0 +1,29 @@
+---
+import PageLayout from "../../components/layout/PageLayout.astro";
+import ProjectCard from "../../components/ui/cards/ProjectCard.astro";
+
+const projects = [
+  {
+    title: "Project One",
+    description: "A fantastic project that solves a real world problem.",
+    link: "#",
+    tech: ["React", "Node.js", "MongoDB"],
+    // image: "/images/projects/project1.jpg"
+  },
+  {
+    title: "Project Two",
+    description: "Another great project enabling users to do amazing things.",
+    link: "#",
+    tech: ["Astro", "Tailwind"],
+    // image: "/images/projects/project2.jpg"
+  }
+];
+---
+
+<PageLayout title="Projects" description="A showcase of my recent work.">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {projects.map((project) => (
+      <ProjectCard {...project} />
+    ))}
+  </div>
+</PageLayout>

@@ -1,0 +1,21 @@
+---
+import { menuLinks } from "../../utils/siteConfig";
+import ThemeToggle from "../shared/ThemeToggle.astro";
+
+---
+
+<header class="py-4 border-b border-gray-100 dark:border-gray-800">
+  <div class="container mx-auto px-4 flex justify-between items-center">
+    <a href="/" class="text-xl font-bold">Portfolio</a>
+    <nav class="hidden md:flex gap-6 items-center">
+      {
+        menuLinks.map((link) => (
+          <a href={link.path} class="hover:text-primary transition-colors">
+            {link.title}
+          </a>
+        ))
+      }
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>

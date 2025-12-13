@@ -1,0 +1,29 @@
+---
+const socialLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com",
+    icon: "github"
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com",
+    icon: "linkedin"
+  },
+  {
+    name: "Twitter",
+    url: "https://twitter.com",
+    icon: "twitter"
+  }
+];
+---
+
+<div class="flex gap-4">
+  {socialLinks.map((link) => (
+    <a href={link.url} target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors">
+      <span class="sr-only">{link.name}</span>
+      {/* Helper to just show text if no icon, or replace with icon component later */}
+      {link.name}
+    </a>
+  ))}
+</div>

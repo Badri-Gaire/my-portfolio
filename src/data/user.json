@@ -1,0 +1,19 @@
+{
+    "name": "Badri Gaire",
+    "role": "Frontend Developer",
+    "summary": "I am a frontend developer who loves building user-friendly and responsive interfaces. I enjoy turning ideas into clean, interactive experiences on the web.",
+    "description": "I have hands-on experience working with modern frontend technologies like React, Next.js, TypeScript, Tailwind CSS, and Astro. I am naturally curious, enjoy exploring new tools and patterns, and believe in continuous learning to improve both code quality and user experience.",
+    "skills": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Astro"
+    ],
+    "traits": [
+        "User-focused",
+        "Responsive UI enthusiast",
+        "Curious learner",
+        "Continuously improving"
+    ]
+}

@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "../../components/layout/PageLayout.astro";
+import BlogCard from "../../components/ui/cards/BlogCard.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<PageLayout title="Blog" description="Thinking out loud.">
+  <div class="grid md:grid-cols-2 gap-6">
+    {posts.map((post) => (
+      <BlogCard 
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.publishDate}
+        slug={post.slug}
+      />
+    ))}
+  </div>
+</PageLayout>

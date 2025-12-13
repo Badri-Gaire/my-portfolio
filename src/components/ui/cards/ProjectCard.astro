@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata | string;
+  link: string;
+  tech?: string[];
+}
+
+const { title, description, image, link, tech = [] } = Astro.props;
+---
+
+<a href={link} class="group block border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-gray-900">
+  {image && (
+    <div class="h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
+      {typeof image === 'string' ? (
+        <img src={image} alt={title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      ) : (
+         <Image src={image} alt={title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      )}
+    </div>
+  )}
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{title}</h3>
+    <p class="text-secondary mb-4 line-clamp-3">{description}</p>
+    <div class="flex flex-wrap gap-2">
+      {tech.map((t) => (
+        <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 rounded text-secondary">{t}</span>
+      ))}
+    </div>
+  </div>
+</a>
