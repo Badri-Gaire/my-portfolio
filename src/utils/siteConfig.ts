@@ -3,7 +3,7 @@ export const siteConfig = {
   description: "A personal portfolio built with Astro and Tailwind CSS",
   lang: "en-US",
   author: "Badri",
-  site: "https://example.com",
+  site: "https://www.badrigaire.com.np",
 };
 
 export const menuLinks = [
@@ -13,15 +13,15 @@ export const menuLinks = [
   },
   {
     title: "About",
-    path: "/about",
+    path: "#about",
+  },
+  {
+    title: "Projects",
+    path: "#projects",
   },
   {
     title: "Blog",
     path: "/blog",
-  },
-  {
-    title: "Projects",
-    path: "/projects",
   },
   {
     title: "Contact",

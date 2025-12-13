@@ -8,7 +8,11 @@
         "Next.js",
         "TypeScript",
         "Tailwind CSS",
-        "Astro"
+        "Astro",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Redux"
     ],
     "traits": [
         "User-focused",

@@ -1,88 +1,68 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Container from "../components/shared/Container.astro";
-import SectionWrapper from "../components/ui/section/SectionWrapper.astro";
-import SectionHeading from "../components/ui/section/SectionHeading.astro";
-import Button from "../components/ui/buttons/Button.astro";
-import SkillCard from "../components/ui/cards/SkillCard.astro";
-import SocialLinks from "../components/shared/SocialLinks.astro";
-
-import userData from "../data/user.json";
-
-const { name, role, summary, description, skills, traits } = userData;
-
-const getSkillIcon = (skill: string) => {
-  const map: Record<string, string> = {
-    React: "react",
-    "Next.js": "nextjs",
-    TypeScript: "ts",
-    "Tailwind CSS": "tailwind",
-    Astro: "astro",
-  };
-  return `https://skillicons.dev/icons?i=${map[skill] || skill.toLowerCase()}`;
-};
+import Hero from "../components/features/home/Hero.astro";
+import Skills from "../components/features/home/Skills.astro";
+import About from "../components/features/home/About.astro";
+import Projects from "../components/features/home/Projects.astro";
 ---
 
 <BaseLayout>
-  <SectionWrapper className="py-20 md:py-32">
-    <div class="flex flex-col md:flex-row items-center gap-12">
-      <div class="flex-1">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
-          Hi, I'm <span class="text-primary">{name.split(" ")[0]}</span>
-        </h1>
-        <p class="text-xl text-secondary mb-8 leading-relaxed">
-          {summary}
-        </p>
-        <div class="flex gap-4 mb-8">
-          <Button href="/projects">View Projects</Button>
-          <Button href="/contact" variant="outline">Contact Me</Button>
-          hello my name is badri gaire
-        </div>
-        <SocialLinks />
-      
-      </div>
-      <div class="flex-1 flex justify-center">
-        <div
-          class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden relative border-4 border-white dark:border-gray-900 shadow-xl"
-        >
-          <img
-            src="/images/badri.webp"
-            alt={name}
-            class="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-    </div>
-  </SectionWrapper>
-
-  <SectionWrapper className="bg-gray-50 dark:bg-gray-800/50">
-    <div class="flex flex-col md:flex-row gap-12 items-center">
-      <div class="flex-1">
-        <SectionHeading title="About Me" />
-        <p class="text-lg text-secondary leading-relaxed mb-6">
-          {description}
-        </p>
-        <div class="flex flex-wrap gap-2">
-          {
-            traits.map((trait) => (
-              <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                {trait}
-              </span>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </SectionWrapper>
-
-  <SectionWrapper>
-    <SectionHeading title="Skills" />
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {
-        skills.map((skill) => (
-          <SkillCard name={skill} icon={getSkillIcon(skill)} />
-        ))
-      }
-    </div>
-  </SectionWrapper>
+  <Hero />
+  <Skills />
+  <About />
+  <Projects />
 </BaseLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+  // Hero animations
+  gsap.to(".animate-on-load", {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    stagger: 0.2,
+    ease: "power3.out",
+  });
+
+  // Scroll animations
+  const animateElements = document.querySelectorAll(".animate-on-scroll");
+
+  animateElements.forEach((element) => {
+    gsap.to(element, {
+      scrollTrigger: {
+        trigger: element,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+  });
+
+  // Smooth scrolling for anchor links
+  const anchors = document.querySelectorAll('a[href^="#"]');
+  anchors.forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault();
+      const currentAnchor = e.currentTarget as HTMLAnchorElement;
+      const targetId = currentAnchor.getAttribute("href");
+      if (!targetId || targetId === "#") return;
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: { y: targetElement, offsetY: 80 },
+          ease: "power2.inOut",
+        });
+      }
+    });
+  });
+</script>
