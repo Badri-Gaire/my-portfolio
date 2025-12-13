@@ -4,13 +4,13 @@
         "title": "SVGR in Astro: Convert SVGs to React Components Easily",
         "description": "Explaining my process and learning curve.",
         "image": "/images/blog/blog-image.webp",
-        "link": "https://ewanblog.com/ghost/#/editor/post/6926ccfb74bda100019e2584"
+        "link": "https://ewanblog.com/svgr-in-astro-convert-svgs-to-react-components-easily/"
     },
     {
         "id": "2",
         "title": "Next.js Error Handling Guide: Managing API Errors with Axios and Fetch on Server & Client",
         "description": "Deep dive into modern web frameworks.",
         "image": "/images/blog/blog-image2.webp",
-        "link": "https://ewanblog.com/ghost/#/editor/post/68fdfb33078de200015ced5f"
+        "link": "https://ewanblog.com/next-js-error-boundary-guide-managing-api-errors-with-axios-and-fetch-on-server-client/"
     }
 ]
