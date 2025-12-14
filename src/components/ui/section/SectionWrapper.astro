@@ -9,7 +9,7 @@ interface Props {
 const { className = "", id } = Astro.props;
 ---
 
-<section id={id} class={`py-12 md:py-20 ${className}`}>
+<section id={id} class={`py-12 ${className}`}>
   <Container>
     <slot />
   </Container>
