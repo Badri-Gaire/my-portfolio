@@ -1,40 +1,40 @@
 [
-    {
-        "company": "EwanByte",
-        "location": "Rupandehi District, Lumbini, Nepal",
-        "totalDuration": "1 yr 2 mos",
-        "logo": "/images/experience/ewanbyte_logo.webp",
-        "roles": [
-            {
-                "title": "Frontend Developer",
-                "type": "Full-time",
-                "start": "Feb 2025",
-                "end": "Present",
-                "duration": "11 mos",
-                "locationType": "Hybrid",
-                "skills": [
-                    "Nextjs",
-                    "Astro",
-                    "TypeScript",
-                    "Tailwind CSS",
-                    "Redux"
-                ]
-            },
-            {
-                "title": "Frontend Developer Intern",
-                "type": "Internship",
-                "start": "Nov 2024",
-                "end": "Feb 2025",
-                "duration": "4 mos",
-                "locationType": "Remote",
-                "skills": [
-                    "Nextjs",
-                    "reactjs",
-                    "JavaScript",
-                    "HTML",
-                    "CSS"
-                ]
-            }
+  {
+    "company": "EwanByte",
+    "location": "Rupandehi District, Lumbini, Nepal",
+    "totalDuration": "1 yr 2 mos",
+    "logo": "/images/badri.webp",
+    "roles": [
+      {
+        "title": "Frontend Developer",
+        "type": "Full-time",
+        "start": "Feb 2025",
+        "end": "Present",
+        "duration": "11 mos",
+        "locationType": "Hybrid",
+        "skills": ["Next.js", "Astro", "TypeScript", "Tailwind CSS", "Redux"],
+        "achievements": [
+          "Built a user-friendly e-commerce platform with responsive design and smooth checkout flow",
+          "Optimized performance by implementing code splitting and lazy loading, reducing page load time by 40%",
+          "Mentored junior developers and conducted code reviews to ensure code quality and best practices",
+          "Implemented error handling and debugging mechanisms to reduce production bugs by 60%",
+          "Collaborated with design and backend teams to deliver pixel-perfect UI components"
         ]
-    }
+      },
+      {
+        "title": "Frontend Developer Intern",
+        "type": "Internship",
+        "start": "Nov 2024",
+        "end": "Feb 2025",
+        "duration": "4 mos",
+        "locationType": "Remote",
+        "skills": ["Next.js", "React.js", "JavaScript", "HTML", "CSS"],
+        "achievements": [
+          "Developed interactive components and improved UI responsiveness",
+          "Fixed bugs and optimized existing features",
+          "Learned and implemented React best practices"
+        ]
+      }
+    ]
+  }
 ]

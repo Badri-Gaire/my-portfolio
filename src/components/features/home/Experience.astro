@@ -1,221 +1,98 @@
 ---
 import SectionWrapper from "../../ui/section/SectionWrapper.astro";
-import SectionHeading from "../../ui/section/SectionHeading.astro";
+import ExperienceContent from "./ExperienceContent.tsx";
 import experienceData from "../../../data/experience.json";
 
 interface Role {
-    title: string;
-    type: string;
-    start: string;
-    end: string;
-    duration: string;
-    locationType: string;
-    skills: string[];
+  title: string;
+  type: string;
+  start: string;
+  end: string;
+  duration: string;
+  locationType: string;
+  skills: string[];
+  achievements?: string[];
 }
 
 interface Company {
-    company: string;
-    location: string;
-    totalDuration: string;
-    logo: string;
-    roles: Role[];
+  company: string;
+  location: string;
+  totalDuration: string;
+  logo: string;
+  roles: Role[];
 }
 
 function calculateDuration(startDateStr: string, endDateStr: string): string {
-    const start = new Date(startDateStr);
-    const end =
-        endDateStr.toLowerCase() === "present"
-            ? new Date()
-            : new Date(endDateStr);
+  const start = new Date(startDateStr);
+  const end =
+    endDateStr.toLowerCase() === "present" ? new Date() : new Date(endDateStr);
 
-    let months =
-        (end.getFullYear() - start.getFullYear()) * 12 +
-        (end.getMonth() - start.getMonth()) +
-        1;
-    const years = Math.floor(months / 12);
-    const remainingMonths = months % 12;
+  let months =
+    (end.getFullYear() - start.getFullYear()) * 12 +
+    (end.getMonth() - start.getMonth()) +
+    1;
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
 
-    const parts = [];
-    if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
-    if (remainingMonths > 0)
-        parts.push(`${remainingMonths} mo${remainingMonths > 1 ? "s" : ""}`);
+  const parts = [];
+  if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+  if (remainingMonths > 0)
+    parts.push(`${remainingMonths} mo${remainingMonths > 1 ? "s" : ""}`);
 
-    return parts.join(" ") || "0 mos";
+  return parts.join(" ") || "0 mos";
 }
 
 const experiences = (experienceData as Company[])
-    .map((exp) => {
-        const allRoles = exp.roles;
-        if (allRoles.length === 0) return null;
+  .map((exp) => {
+    const allRoles = exp.roles;
+    if (allRoles.length === 0) return null;
 
-        // Filter out intern roles
-        const nonInternRoles = allRoles.filter(
-            (role) => !role.title.toLowerCase().includes("intern"),
-        );
+    const companyStart = allRoles[allRoles.length - 1].start;
+    const companyEnd = allRoles[0].end;
 
-        if (nonInternRoles.length === 0) return null;
+    const calculatedTotal = calculateDuration(companyStart, companyEnd);
 
-        const companyStart = nonInternRoles[nonInternRoles.length - 1].start;
-        const companyEnd = nonInternRoles[0].end;
-
-        const calculatedTotal = calculateDuration(companyStart, companyEnd);
-
-        return {
-            ...exp,
-            totalDuration: calculatedTotal,
-            roles: nonInternRoles.map((role) => ({
-                ...role,
-                duration: calculateDuration(role.start, role.end),
-            })),
-        };
-    })
-    .filter((exp) => exp !== null);
+    return {
+      ...exp,
+      totalDuration: calculatedTotal,
+      roles: allRoles.map((role) => ({
+        ...role,
+        duration: calculateDuration(role.start, role.end),
+      })),
+    };
+  })
+  .filter((exp) => exp !== null);
 ---
 
 <SectionWrapper
-    id="experience"
-    className="py-20 md:py-32 relative overflow-hidden"
+  id="experience"
+  className="py-20 md:py-32 relative overflow-hidden"
 >
-    <!-- Decorative background -->
-    <div
-        class="absolute inset-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950"
-    >
+  <!-- Animated gradient background - matching About section -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/20 to-purple-50/20 dark:from-slate-900 dark:via-slate-800/50 dark:to-purple-900/20"
+  >
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Title Section with Falling Animation -->
+    <div class="text-center mb-20 max-w-3xl mx-auto">
+      <h1
+        class="text-5xl md:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 mb-6 experience-h1"
+      >
+        Work Experience
+      </h1>
+
+      <p
+        class="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-medium"
+      >
+        Recently working places and my professional journey
+      </p>
     </div>
-    <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.05),transparent_50%)]"
-    >
+
+    <!-- Experience Cards -->
+    <div class="max-w-4xl mx-auto">
+      <ExperienceContent client:load experiences={experiences} />
     </div>
-
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="max-w-5xl mx-auto">
-            <!-- Title -->
-            <div class="text-center mb-20">
-                <SectionHeading title="Work Experience" />
-                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
-                <p class="text-gray-600 dark:text-gray-400 mt-6 text-lg">
-                    My professional journey and expertise
-                </p>
-            </div>
-
-            <!-- Experience Cards -->
-            <div class="space-y-8">
-                {experiences.map((exp, companyIndex) => (
-                    <div class="experience-card group relative bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700">
-                        <!-- Gradient overlay on hover -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 dark:from-blue-500/10 dark:to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                        <div class="relative z-10">
-                            <!-- Company Header -->
-                            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8 pb-8 border-b-2 border-gray-100 dark:border-gray-700">
-                                <!-- Company Logo -->
-                                <div class="relative">
-                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 flex items-center justify-center overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                        {exp.logo ? (
-                                            <img src={exp.logo} alt={exp.company} class="w-full h-full object-cover" />
-                                        ) : (
-                                            <span class="text-4xl font-bold bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                                {exp.company[0]}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div class="flex-1">
-                                    <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                        {exp.company}
-                                    </h3>
-                                    <div class="flex flex-wrap items-center gap-4 text-gray-600 dark:text-gray-400">
-                                        <span class="flex items-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
-                                                <path d="M20 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0 1 18 0Z" />
-                                                <circle cx="12" cy="10" r="3" />
-                                            </svg>
-                                            {exp.location}
-                                        </span>
-                                        <span class="px-4 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-semibold">
-                                            {exp.totalDuration}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Roles -->
-                            <div class="space-y-6">
-                                {exp.roles.map((role) => (
-                                    <div class="relative pl-6 border-l-4 border-blue-200 dark:border-blue-900/50 hover:border-blue-400 dark:hover:border-blue-700 transition-colors">
-                                        <!-- Timeline dot -->
-                                        <div class="absolute -left-[11px] top-2 w-5 h-5 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 ring-4 ring-white dark:ring-gray-800"></div>
-
-                                        <div class="space-y-3">
-                                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                                                <h4 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                                    {role.title}
-                                                </h4>
-                                                <span class="text-sm font-semibold text-blue-600 dark:text-blue-400 whitespace-nowrap bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
-                                                    {role.start} - {role.end}
-                                                </span>
-                                            </div>
-
-                                            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                                                <span class="flex items-center gap-2 font-medium px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
-                                                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                                                    </svg>
-                                                    {role.type}
-                                                </span>
-                                                <span class="flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="10" />
-                                                        <polyline points="12 6 12 12 16 14" />
-                                                    </svg>
-                                                    {role.duration}
-                                                </span>
-                                                <span class="italic px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                                                    {role.locationType}
-                                                </span>
-                                            </div>
-
-                                            <!-- Skills -->
-                                            {role.skills && role.skills.length > 0 && (
-                                                <div class="flex flex-wrap items-center gap-2 pt-2">
-                                                    {role.skills.map((skill) => (
-                                                        <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 hover:scale-105 hover:shadow-md transition-all cursor-default">
-                                                            {skill}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    </div>
+  </div>
 </SectionWrapper>
-
-<style>
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .experience-card {
-        animation: slideIn 0.6s ease-out;
-        animation-fill-mode: both;
-    }
-
-    .experience-card:nth-child(1) { animation-delay: 0.1s; }
-    .experience-card:nth-child(2) { animation-delay: 0.2s; }
-    .experience-card:nth-child(3) { animation-delay: 0.3s; }
-</style>

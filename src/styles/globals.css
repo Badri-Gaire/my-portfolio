@@ -6,6 +6,8 @@
   --color-secondary: var(--secondary);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  
 }
 
 @layer base {
@@ -27,3 +29,7 @@
 body {
   @apply bg-background text-foreground antialiased;
 }
+
+.test {
+    @apply border-2 border-red-500
+  }

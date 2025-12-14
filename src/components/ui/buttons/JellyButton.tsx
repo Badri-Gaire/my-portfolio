@@ -13,7 +13,7 @@ const JellyButton: FC<JellyButtonProps> = ({ href, children, variant = 'primary'
 
     const buttonClasses = isPrimary
         ? "px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow"
-        : "px-8 py-3 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-full font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors";
+        :  " px-8 py-3 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-full font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors";
 
     const MotionComponent = href ? motion.a : motion.button;
 

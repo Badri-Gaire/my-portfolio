@@ -1,269 +1,61 @@
 ---
 import SectionWrapper from "../../ui/section/SectionWrapper.astro";
-import Button from "../../ui/buttons/Button.astro";
 import JellyButton from "../../ui/buttons/JellyButton";
 import StormToggle from "../../ui/buttons/StormToggle";
 import SocialLinks from "../../shared/SocialLinks.astro";
-import { Zap } from "lucide-react";
 import userData from "../../../data/user.json";
+import TextReveal from "./TextReveal.tsx";
+import FadeIn from "./FadeIn.tsx";
+import ImageStorm from "./ImageStorm.tsx";
+import Lightning from "./Lightning.tsx";
 
 const { name, role, summary } = userData;
 ---
 
 <SectionWrapper
-    className="py-20 md:py-32 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden relative"
-    id="home"
+  className=" flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden relative"
+  id="home"
 >
-    <div
-        class="flex flex-col md:flex-row items-center gap-12 w-full z-10 relative"
-    >
-        <div class="flex-1 space-y-6">
-            <h1
-                class="text-4xl md:text-6xl font-bold uppercase tracking-tight overflow-hidden"
-            >
-                {
-                    `Hi, I'm ${name}`.split(" ").map((word) => (
-                        <span class="inline-block animate-word opacity-0 translate-y-full transform transition-all">
-                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
-                                {word}
-                            </span>
-                            &nbsp;
-                        </span>
-                    ))
-                }
-            </h1>
-            <h2
-                class="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-200 overflow-hidden"
-            >
-                {
-                    role
-                        .split(" ")
-                        .map((word) => (
-                            <span class="inline-block animate-word opacity-0 translate-y-full transform transition-all delay-100">
-                                {word}&nbsp;
-                            </span>
-                        ))
-                }
-            </h2>
-            <p
-                class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl animate-fade-in opacity-0"
-            >
-                {summary}
-            </p>
-            <div class="flex gap-4 pt-4 animate-fade-in opacity-0">
-                <JellyButton client:load href="#projects"
-                    >View Projects</JellyButton
-                >
-                <JellyButton client:load href="/contact" variant="outline"
-                    >Contact Me</JellyButton
-                >
-                <StormToggle client:load />
-            </div>
-            <div class="pt-4 animate-fade-in opacity-0">
-                <SocialLinks />
-            </div>
+  <div
+    class="flex flex-col md:flex-row items-center gap-12 w-full z-10 relative"
+  >
+    <div class="flex-1 space-y-6">
+      <TextReveal
+        client:load
+        text={`Hi, I'm ${name}`}
+        tag="h1"
+        className="text-4xl md:text-6xl font-bold uppercase tracking-tight overflow-hidden pb-5 "
+      />
+      <TextReveal
+        client:load
+        text={role}
+        tag="h2"
+        className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-200 overflow-hidden pb-5"
+        wordDelay={0.09}
+      />
+      <FadeIn
+        client:load
+        className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl"
+      >
+        {summary}
+      </FadeIn>
+      <div class="flex gap-4 pt-4">
+        <JellyButton client:load href="#projects">View Projects</JellyButton>
+        <!-- hidden for now -->
+        <div class="hidden ">  
+          <JellyButton client:load href="/contact" variant="outline"
+            >Contact Me</JellyButton
+          >
         </div>
 
-        <div class="flex-1 flex justify-center [perspective:1000px]">
-            <div class="relative w-72 h-72 md:w-96 md:h-96 group">
-                <!-- Outer Ring - Cracked/Wired Effect -->
-                <div
-                    class="absolute -inset-4 md:-inset-8 border-2 border-dashed border-gray-400 dark:border-white rounded-full animate-[spin_20s_linear_infinite] opacity-30"
-                >
-                </div>
-
-                <!-- 3D Hollow Rings -->
-                <div
-                    class="absolute inset-0 rounded-full border border-primary/30 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]"
-                >
-                </div>
-                <div
-                    class="absolute inset-0 rounded-full border border-purple-500/20 animate-[pulse_4s_ease-in-out_infinite]"
-                >
-                </div>
-
-                <!-- Rotating Arcs (Hollow 3D illusion) -->
-                <div
-                    class="absolute -inset-1 rounded-full border-t-2 border-r-2 border-primary/50 animate-[spin_6s_linear_infinite]"
-                >
-                </div>
-                <div
-                    class="absolute -inset-2 rounded-full border-b-2 border-l-2 border-purple-500/50 animate-[spin_8s_linear_reverse_infinite]"
-                >
-                </div>
-
-                <!-- Main Image Container -->
-                <div
-                    class="w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-900 shadow-2xl relative z-10 bg-white dark:bg-gray-900 transition-all duration-500 group-hover:scale-105"
-                >
-                    <img
-                        src="/images/badri2.webp"
-                        alt={name}
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                </div>
-
-                <!-- Dynamic Lighting Glow (White in Dark, Dark in Light) -->
-                <div
-                    class="absolute -inset-8 -z-10 blur-3xl rounded-full opacity-60 transition-colors duration-500
-                    bg-gradient-to-tr from-blue-200/50 via-purple-200/50 to-pink-200/50
-                    dark:from-blue-500/30 dark:via-purple-500/30 dark:to-pink-500/30
-                    animate-[pulse_4s_ease-in-out_infinite]"
-                >
-                </div>
-
-                <!-- Lightning Visuals -->
-                <div
-                    id="lightning-left"
-                    class="absolute -left-12 top-0 w-24 h-48 opacity-0 pointer-events-none transition-opacity duration-75 z-20"
-                >
-                    <svg
-                        viewBox="0 0 100 200"
-                        class="w-full h-full lightning-svg fill-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]"
-                    >
-                        <path
-                            d="M40 0 L10 100 L40 100 L20 200 L80 80 L50 80 L90 0 Z"
-                        ></path>
-                    </svg>
-                </div>
-                <div
-                    id="lightning-right"
-                    class="absolute -right-12 bottom-0 w-24 h-48 opacity-0 pointer-events-none transition-opacity duration-75 z-20 rotate-180"
-                >
-                    <svg
-                        viewBox="0 0 100 200"
-                        class="w-full h-full lightning-svg fill-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)]"
-                    >
-                        <path
-                            d="M40 0 L10 100 L40 100 L20 200 L80 80 L50 80 L90 0 Z"
-                        ></path>
-                    </svg>
-                </div>
-
-                <!-- Sound Effect -->
-                <audio
-                    id="thunder-sound"
-                    src="/sounds/lightning.mp3"
-                    preload="auto"></audio>
-            </div>
-        </div>
+        <StormToggle client:load />
+      </div>
+      <div class="pt-4 animate-fade-in">
+        <SocialLinks />
+      </div>
     </div>
+
+    <ImageStorm client:load src="/images/badri2.webp" alt={name} />
+    <Lightning client:load />
+  </div>
 </SectionWrapper>
-
-<script>
-    import { gsap } from "gsap";
-
-    // Text Reveal Animation
-    const words = document.querySelectorAll(".animate-word");
-    gsap.to(words, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-    });
-
-    // Fade in other elements
-    gsap.to(".animate-fade-in", {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.8, // Wait for text
-        stagger: 0.2,
-        ease: "power2.out",
-    });
-
-    // Lightning & Sound Logic
-    const lightningLeft = document.getElementById("lightning-left");
-    const lightningRight = document.getElementById("lightning-right");
-    const sound = document.getElementById("thunder-sound") as HTMLAudioElement;
-    const stormToggle = document.getElementById("storm-toggle");
-
-    let isPlaying = false;
-
-    const triggerLightning = () => {
-        if (isPlaying) return; // Prevent overlapping triggers
-        isPlaying = true;
-
-        // 1. Visual: Randomly choose left/right
-        const target = Math.random() > 0.5 ? lightningLeft : lightningRight;
-
-        if (target) {
-            target.style.opacity = "1";
-            target.style.filter = "brightness(2) drop-shadow(0 0 10px cyan)";
-
-            // Flash off quickly
-            setTimeout(() => {
-                target.style.opacity = "0";
-            }, 100);
-
-            // Double flash
-            setTimeout(() => {
-                target.style.opacity = "0.8";
-                setTimeout(() => {
-                    target.style.opacity = "0";
-                }, 50);
-            }, 150);
-        }
-
-        // 2. Audio: Play file (Max 5s)
-        if (sound) {
-            sound.currentTime = 0;
-            sound.volume = 0.5;
-
-            const playPromise = sound.play();
-            if (playPromise !== undefined) {
-                playPromise.catch((error) => {
-                    console.log("Audio autoplay blocked by browser:", error);
-                });
-            }
-
-            // Cut off after 5 seconds and reset state
-            setTimeout(() => {
-                sound.pause();
-                sound.currentTime = 0;
-                isPlaying = false; // Allow next trigger
-            }, 5000);
-        } else {
-            // Reset state if no sound
-            setTimeout(() => {
-                isPlaying = false;
-            }, 5000);
-        }
-    };
-
-    // Toggle Button Click Listener (supports both old and new storm toggle)
-    stormToggle?.addEventListener("click", () => {
-        triggerLightning();
-    });
-
-    // Listen for custom event from React component
-    window.addEventListener("storm-toggle", () => {
-        triggerLightning();
-    });
-</script>
-
-<style>
-    /* Custom Lightning Keyframes for continuous jagged motion */
-    @keyframes jitter {
-        0% {
-            transform: scale(1) rotate(0deg);
-        }
-        25% {
-            transform: scale(1.02) rotate(1deg);
-        }
-        50% {
-            transform: scale(0.98) rotate(-1deg);
-        }
-        75% {
-            transform: scale(1.01) rotate(0.5deg);
-        }
-        100% {
-            transform: scale(1) rotate(0deg);
-        }
-    }
-
-    .lightning-svg {
-        animation: jitter 0.2s infinite;
-    }
-</style>
