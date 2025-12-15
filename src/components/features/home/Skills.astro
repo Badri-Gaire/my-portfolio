@@ -8,32 +8,32 @@ import userData from "../../../data/user.json";
 const { skills } = userData;
 
 const getSkillIcon = (skill: string) => {
-    const map: Record<string, string> = {
-        React: "react",
-        "Next.js": "nextjs",
-        TypeScript: "ts",
-        "Tailwind CSS": "tailwind",
-        Astro: "astro",
-        JavaScript: "js",
-    };
-    return `https://skillicons.dev/icons?i=${map[skill] || skill.toLowerCase()}`;
+  const map: Record<string, string> = {
+    React: "react",
+    "Next.js": "nextjs",
+    TypeScript: "ts",
+    "Tailwind CSS": "tailwind",
+    Astro: "astro",
+    JavaScript: "js",
+  };
+  return `https://skillicons.dev/icons?i=${map[skill] || skill.toLowerCase()}`;
 };
 ---
 
 <SectionWrapper id="skills">
-    <SectionHeading title="Skills" className="text-center mb-10" />
-    <div
-        class="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background py-10"
+  <SectionHeading title="Skills" className="text-center mb-10" />
+  <div
+    class="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg  py-10"
+  >
+    <Marquee
+      pauseOnHover={true}
+      className="[--duration:20s] [--gap:1.5rem] py-4"
     >
-        <Marquee
-            pauseOnHover={true}
-            className="[--duration:20s] [--gap:1.5rem] py-4"
-        >
-            {
-                skills.map((skill) => (
-                    <SkillCard name={skill} icon={getSkillIcon(skill)} />
-                ))
-            }
-        </Marquee>
-    </div>
+      {
+        skills.map((skill) => (
+          <SkillCard name={skill} icon={getSkillIcon(skill)} />
+        ))
+      }
+    </Marquee>
+  </div>
 </SectionWrapper>

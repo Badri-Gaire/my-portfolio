@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 ---
 
 <header
-  class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800"
+  class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-100 dark:border-gray-800"
 >
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <a href="/" class="text-xl font-bold z-50 relative">Portfolio</a>
@@ -46,7 +46,7 @@ import { Menu, X } from "lucide-react";
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-x-0 top-[60px] bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-xl md:hidden opacity-0 invisible"
+    class="fixed inset-x-0 top-15 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-xl md:hidden opacity-0 invisible"
   >
     <nav class="container mx-auto px-4 py-6 flex flex-col gap-4">
       {
@@ -64,7 +64,7 @@ import { Menu, X } from "lucide-react";
 </header>
 
 <!-- Spacer for fixed header -->
-<div class="h-[60px]"></div>
+<div class="h-15"></div>
 
 <script>
   import { gsap } from "gsap";
@@ -102,7 +102,7 @@ import { Menu, X } from "lucide-react";
           stagger: 0.05,
           duration: 0.3,
           delay: 0.1,
-        },
+        }
       );
     } else {
       // Close Menu

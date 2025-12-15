@@ -22,7 +22,7 @@ const { name, role, summary } = userData;
     <div class="flex-1 space-y-6">
       <TextReveal
         client:load
-        text={`Hi, I'm ${name}`}
+        text={`Hi\nI'm ${name}`}
         tag="h1"
         className="text-4xl md:text-6xl font-bold uppercase tracking-tight overflow-hidden pb-5 "
       />
@@ -42,7 +42,7 @@ const { name, role, summary } = userData;
       <div class="flex gap-4 pt-4">
         <JellyButton client:load href="#projects">View Projects</JellyButton>
         <!-- hidden for now -->
-        <div class="hidden ">  
+        <div class="hidden">
           <JellyButton client:load href="/contact" variant="outline"
             >Contact Me</JellyButton
           >

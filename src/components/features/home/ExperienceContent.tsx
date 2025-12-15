@@ -1,27 +1,5 @@
 import { motion } from "framer-motion";
-
-interface Role {
-  title: string;
-  type: string;
-  start: string;
-  end: string;
-  duration: string;
-  locationType: string;
-  skills: string[];
-  achievements?: string[];
-}
-
-interface Experience {
-  company: string;
-  location: string;
-  totalDuration: string;
-  logo: string;
-  roles: Role[];
-}
-
-interface ExperienceContentProps {
-  experiences: Experience[];
-}
+import type { ExperienceContentProps } from "../../../types/ExperienceContentTypes";
 
 export default function ExperienceContent({
   experiences,
@@ -74,7 +52,7 @@ export default function ExperienceContent({
       whileInView="visible"
       viewport={{ once: true, amount: 0.15, margin: "0px 0px -100px 0px" }}
       variants={containerVariants}
-      className="space-y-12"
+      className="space-y-12 "
     >
       {filteredExperiences.map((exp) =>
         exp.roles.length === 0 ? null : (
@@ -104,37 +82,36 @@ export default function ExperienceContent({
                   {/* Content */}
                   <motion.div
                     variants={contentVariants}
-                    className="flex-1 pb-8"
+                    className="flex flex-col lg:flex-row pb-8 "
                   >
-                    {/* Role Title */}
-                    <h4 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                      {role.title}
-                    </h4>
+                    <div>
+                      {/* Role Title */}
+                      <h4 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                        {role.title}
+                      </h4>
 
-                    {/* Company & Location */}
-                    <div className="mb-4 space-y-1">
-                      <p className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">
-                        @ {exp.company}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {exp.location}
-                      </p>
-                    </div>
+                      {/* Company & Location */}
+                      <div className="mb-4 space-y-1">
+                        <p className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">
+                          @ {exp.company}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {exp.location}
+                        </p>
+                      </div>
 
-                    {/* Duration Tags */}
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      <motion.span
-                        whileHover={{ scale: 1.05 }}
-                        className="inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
-                      >
-                        {role.type}
-                      </motion.span>
-                      <span className="inline-block px-4 py-1.5 text-xs font-bold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-800">
-                        {role.duration}
-                      </span>
-                      <span className="inline-block px-4 py-1.5 text-xs font-bold bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300 rounded-full border border-pink-200 dark:border-pink-800">
-                        {role.locationType}
-                      </span>
+                      {/* Duration Tags */}
+                      <div className="flex flex-wrap gap-2 mb-5">
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          className="inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+                        >
+                          {role.type}
+                        </motion.span>
+                        <span className="inline-block px-4 py-1.5 text-xs font-bold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-800">
+                          {role.duration}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Achievements */}
@@ -162,30 +139,6 @@ export default function ExperienceContent({
                         ))}
                       </motion.ul>
                     )}
-
-                    {/* Skills */}
-                    <motion.div
-                      className="flex flex-wrap gap-2"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ delay: 0.5, duration: 0.6 }}
-                    >
-                      {role.skills.map((skill, i) => (
-                        <motion.span
-                          key={skill}
-                          initial={{ opacity: 0, scale: 0.7 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          whileHover={{
-                            scale: 1.08,
-                            backgroundColor: "rgba(99, 102, 241, 0.1)",
-                          }}
-                          transition={{ delay: 0.5 + i * 0.06, duration: 0.4 }}
-                          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-linear-to-r from-indigo-100/50 to-purple-100/50 dark:from-indigo-900/20 dark:to-purple-900/20 text-indigo-700 dark:text-indigo-300 border border-indigo-300/50 dark:border-indigo-800/50 hover:border-indigo-400 dark:hover:border-indigo-600 transition-colors"
-                        >
-                          {skill}
-                        </motion.span>
-                      ))}
-                    </motion.div>
                   </motion.div>
                 </div>
               </motion.div>
