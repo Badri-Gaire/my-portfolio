@@ -5,14 +5,22 @@ import Skills from "../components/features/home/Skills.astro";
 import About from "../components/features/home/About.astro";
 import Experience from "../components/features/home/Experience.astro";
 import Projects from "../components/features/home/Projects.astro";
+import BlogCard from "../components/features/home/BlogCard.astro";
 ---
 
 <BaseLayout>
+  <!-- Images and title -->
   <Hero />
-  <About />
-  <Experience />
+  <!-- All skills sections -->
   <Skills />
+  <!-- Experiences sections -->
+  <Experience />
+  <!-- ALl my projects -->
   <Projects />
+  <!-- All my blog -->
+  <BlogCard home="true" />
+  <!-- About me -->
+  <About />
 </BaseLayout>
 
 <script>
@@ -21,8 +29,6 @@ import Projects from "../components/features/home/Projects.astro";
   import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-  // Hero animations are now handled within the Hero component
 
   // Scroll animations
   const animateElements = document.querySelectorAll(".animate-on-scroll");

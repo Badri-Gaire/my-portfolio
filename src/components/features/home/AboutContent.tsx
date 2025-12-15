@@ -97,7 +97,7 @@ export default function AboutContent({
               className="absolute inset-0 bg-linear-to-r from-indigo-600 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"
               whileHover={{ opacity: 1 }}
             />
-            <motion.span className="relative px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 rounded-full text-sm font-semibold transition-all hover:border-indigo-600 dark:hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/20 block">
+            <motion.span className="relative px-6 py-3 min-w-52 text-nowrap text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 rounded-full text-sm font-semibold transition-all hover:border-indigo-600 dark:hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/20 block">
               {trait}
             </motion.span>
           </motion.div>

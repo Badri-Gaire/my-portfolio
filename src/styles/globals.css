@@ -6,8 +6,6 @@
   --color-secondary: var(--secondary);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
-  
 }
 
 @layer base {
@@ -17,7 +15,7 @@
     --primary: #3b82f6;
     --secondary: #64748b;
   }
-  
+
   .dark {
     --background: #0f172a;
     --foreground: #ffffff;
@@ -31,5 +29,5 @@ body {
 }
 
 .test {
-    @apply border-2 border-red-500
-  }
+  @apply border-2 border-red-500;
+}
