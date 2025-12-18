@@ -4,27 +4,27 @@
     "description": "An eCommerce website focused on selling mobile covers with a modern, responsive, and user-friendly shopping experience.",
     "link": "#",
     "tech": ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
-    "image": "https://via.placeholder.com/600x400"
+    "image": "/images/wrappers-wrap.png"
   },
   {
     "title": "Wrappers Wrap Portal",
     "description": "An admin panel for managing products, orders, and content of the Wrappers Wrap eCommerce platform.",
     "link": "#",
     "tech": ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
-    "image": "https://via.placeholder.com/600x400"
+    "image": "images/wrappers-portal.png"
   },
   {
     "title": "Letsdo",
     "description": "A multi-tenant eCommerce platform that allows multiple stores to operate independently with advanced features and scalable architecture.",
     "link": "#",
     "tech": ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
-    "image": "https://via.placeholder.com600x400"
+    "image": "images/portal-store.png"
   },
   {
     "title": "Letsdo Portal",
     "description": "A powerful admin portal for managing the Letsdo multi-tenant eCommerce system, providing advanced controls and company-level features.",
     "link": "#",
     "tech": ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
-    "image": "https://via.placeholder.com/600x400"
+    "image": "images/portal-letsdo.png"
   }
 ]

@@ -5,6 +5,7 @@ import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
 import Seo from "../components/shared/Seo.astro";
 import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
+import Snowfall from "react-snowfall";
 
 interface Props {
   title?: string;
@@ -28,6 +29,7 @@ const {
     <meta name="generator" content={Astro.generator} />
   </head>
   <body class="bg-background text-foreground flex flex-col min-h-screen">
+    <Snowfall color="#82C3D9" client:load/>
     <Navbar />
     <main class="grow container mx-auto px-4">
       <slot />
@@ -36,3 +38,5 @@ const {
     <ScrollToTop />
   </body>
 </html>
+
+<!--  -->
