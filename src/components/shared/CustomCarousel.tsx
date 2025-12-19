@@ -1,22 +1,24 @@
-'use client';
-import React from 'react';
-import Carousel from 'react-multi-carousel';
+import React from "react";
+import Carousel, { type ButtonGroupProps } from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+// import FlexBox from "../../wrapper/Flexbox";
+// import ArrowButton from "../buttons/ArrowButton";
 
-const TestimonialSlider = ({ children }: { children?: React.ReactNode }) => {
+const CustomCarousel = ({ children }: { children?: React.ReactNode }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 2,
-      slidesToSlide: 2,
+      items: 3,
+      slidesToSlide: 1,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-      slidesToSlide: 2,
+      items: 3,
+      slidesToSlide: 1,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 1,
+      items: 2,
       slidesToSlide: 1,
     },
     mobile: {
@@ -26,33 +28,31 @@ const TestimonialSlider = ({ children }: { children?: React.ReactNode }) => {
     },
   };
 
-  const CustomDot: React.FC<{ onClick: () => void; active: boolean }> = ({
-    onClick,
-    active,
-  }) => {
-    return (
-      <button
-        onClick={onClick}
-        className={`mx-1 h-2 w-2 rounded-full transition-colors ${
-          active ? 'bg-store-primary' : 'bg-store-secondary'
-        }`}
-        aria-label="Go to slide"
-      />
-    );
-  };
+  // const CustomButton = ({ next, previous }:ButtonGroupProps) => {
+    
+  //   return (
+  //     <div className="flex gap-space-15 justify-center z-10 py-10">
+  //       <ArrowButton
+  //         className="transform rotate-0"
+  //         onClick={previous}
+  //       />
+  //       <ArrowButton className="transform rotate-180" onClick={next} />
+  //     </div>
+  //   );
+  // };
+
   return (
-    <div className="relative ">
+    <div>
       <Carousel
         responsive={responsive}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={8000}
-        showDots={true}
+        autoPlaySpeed={4000}
         arrows={false}
+        showDots={false}
         itemClass="carousel-item"
-        renderDotsOutside={true}
-        // className='space-x-6'
-        customDot={<CustomDot onClick={() => {}} active={false} />}
+        renderButtonGroupOutside={true}
+        // customButtonGroup={<CustomButton />}
       >
         {children}
       </Carousel>
@@ -60,4 +60,4 @@ const TestimonialSlider = ({ children }: { children?: React.ReactNode }) => {
   );
 };
 
-export default TestimonialSlider;
+export default CustomCarousel;
