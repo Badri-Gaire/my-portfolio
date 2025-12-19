@@ -120,6 +120,7 @@ export default function ExperienceContent({
                         className="space-y-3 mb-6"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
+                        // viewport={{once:true}}
                         transition={{ delay: 0.3, duration: 0.6 }}
                       >
                         {role.achievements.map((achievement, i) => (

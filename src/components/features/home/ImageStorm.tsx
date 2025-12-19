@@ -14,7 +14,7 @@ export default function ImageStorm({
   sizeClass = "w-72 h-72 md:w-96 md:h-96",
 }: Props) {
   return (
-    <div className="flex-1 flex justify-center perspective-[1000px] ">
+    <div className="flex-1 flex justify-center perspective-[1000px] select-none ">
       <motion.div
         className={`relative ${sizeClass} group overflow-visible`}
         whileHover={{ scale: 1.02 }}

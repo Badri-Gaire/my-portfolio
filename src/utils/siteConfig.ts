@@ -21,7 +21,7 @@ export const menuLinks = [
   },
   {
     title: "Blog",
-    path: "/blog",
+    path: "#blog",
   },
   {
     title: "Contact",
