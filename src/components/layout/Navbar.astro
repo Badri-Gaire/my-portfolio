@@ -1,11 +1,11 @@
 ---
 import { menuLinks } from "../../utils/siteConfig";
-import ThemeToggle from "../shared/ThemeToggle.astro";
+// import ThemeToggle from "../shared/ThemeToggle.astro";
 import { Menu, X } from "lucide-react";
 ---
 
 <header
-  class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-100 dark:border-gray-800"
+  class="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg lg:border-b lg:border-gray-100 dark:border-gray-800"
 >
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <a href="/" class="text-xl font-bold z-50 relative">Portfolio</a>
@@ -27,7 +27,7 @@ import { Menu, X } from "lucide-react";
 
     <!-- Mobile Navigation Controls -->
     <div class="flex items-center gap-4 md:hidden">
-      <!-- <ThemeToggle />
+      <!-- <ThemeToggle /> -->
       <button
         id="menu-toggle"
         class="relative z-50 p-2 -mr-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors focus:outline-none"
@@ -40,7 +40,7 @@ import { Menu, X } from "lucide-react";
           <X className="size-6" client:load />
         </div>
       </button>
-    </div> -->
+    </div>
   </div>
 
   <!-- Mobile Menu Overlay -->
@@ -69,7 +69,7 @@ import { Menu, X } from "lucide-react";
 <script>
   import { gsap } from "gsap";
 
-  //const menuToggle = document.getElementById("menu-toggle");
+  const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   const iconOpen = document.getElementById("menu-icon-open");
   const iconClose = document.getElementById("menu-icon-close");
@@ -118,7 +118,7 @@ import { Menu, X } from "lucide-react";
     }
   };
 
-  //menuToggle?.addEventListener("click", toggleMenu);
+  menuToggle?.addEventListener("click", toggleMenu);
 
   // Close menu when a link is clicked
   mobileLinks.forEach((link) => {
