@@ -3,17 +3,25 @@ import SectionWrapper from "../../ui/section/SectionWrapper.astro";
 import SectionHeading from "../../ui/section/SectionHeading.astro";
 import ProjectCard from "../../ui/cards/ProjectCard.astro";
 import projectsData from "../../../data/projects.json";
-import CustomCarousel from "../../shared/CustomCarousel";
+// import CustomCarousel from "../../shared/CustomCarousel";
 ---
 
 <SectionWrapper id="projects" className="py-20">
   <SectionHeading title="Featured Projects" className="mb-12" />
 
-  <CustomCarousel client:only="react">
-    {
-      projectsData.map((project) => (
-          <ProjectCard  {...project} />
-      ))
-    }
-  </CustomCarousel>
+  <!-- <CustomCarousel client:only="react"> -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-20">
+    {projectsData.map((project) => <ProjectCard {...project} />)}
+  </div>
+
+  <!-- </CustomCarousel> -->
 </SectionWrapper>
+
+
+
+<!--    "title": "Letsdo",
+    "description": "A multi-tenant eCommerce platform that allows multiple stores to operate independently with advanced features and scalable architecture.",
+    "link": "#",
+    "tech": ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
+    "image": "images/portal-store.png"
+   -->
