@@ -82,7 +82,7 @@ export default function ExperienceContent({
                   {/* Content */}
                   <motion.div
                     variants={contentVariants}
-                    className="flex flex-col lg:flex-row pb-8 "
+                    className="flex flex-col lg:flex-row lg:pb-8 "
                   >
                     <div>
                       {/* Role Title */}
