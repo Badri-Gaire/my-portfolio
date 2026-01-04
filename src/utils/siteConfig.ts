@@ -4,6 +4,10 @@ export const siteConfig = {
   lang: "en-US",
   author: "Badri",
   site: "https://www.badrigaire.com.np",
+  socialLinks: [
+    "https://www.linkedin.com/in/badri-gaire-85881a334/",
+    "https://github.com/Badri-Gaire",
+  ],
 };
 
 export const menuLinks = [
