@@ -5,6 +5,7 @@
   "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro preview",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -13,6 +14,7 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.6.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@vite-pwa/astro": "^1.2.0",
     "astro": "^5.16.5",
     "framer-motion": "^12.23.26",
     "gsap": "^3.14.2",
@@ -21,7 +23,8 @@
     "react-dom": "^19.2.3",
     "react-multi-carousel": "^2.8.6",
     "react-snowfall": "^2.4.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "workbox-window": "^7.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",
