@@ -34,7 +34,16 @@ const {
       publishDate={publishDate}
     />
     <meta charset="utf-8" />
-    <link rel="icon" type="image/webp" href="/images/badri2.webp" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="My Portfolio" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
   </head>
@@ -46,5 +55,17 @@ const {
     </main>
     <Footer />
     <ScrollToTop />
+    <script>
+      import { registerSW } from "virtual:pwa-register";
+      registerSW({
+        immediate: true,
+        onRegisteredSW(swUrl, r) {
+          console.log(`Service Worker at: ${swUrl}`);
+        },
+        onRegisterError(error) {
+          console.log("SW registration error", error);
+        },
+      });
+    </script>
   </body>
 </html>
