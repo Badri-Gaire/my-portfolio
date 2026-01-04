@@ -11,7 +11,12 @@ interface Props {
 const { title, description, publishDate } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  publishDate={publishDate}
+  type="article"
+>
   <Container>
     <article class="prose dark:prose-invert lg:prose-xl mx-auto py-10">
       <header class="mb-8">

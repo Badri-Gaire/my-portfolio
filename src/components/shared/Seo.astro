@@ -5,20 +5,74 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	type?: "website" | "article";
+	publishDate?: Date;
 }
 
-const { title, description, image = "/images/og-image.png" } = Astro.props;
+const {
+	title,
+	description,
+	image = "/images/og-image.png",
+	type = "website",
+	publishDate,
+} = Astro.props;
 
 const siteUrl = siteConfig.site;
 const socialImageURL = new URL(image, siteUrl).href;
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+
+const jsonLD: { "@context": string; "@graph": any[] } = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": `${siteUrl}/#website`,
+			url: siteUrl,
+			name: siteConfig.title,
+			description: siteConfig.description,
+			publisher: {
+				"@id": `${siteUrl}/#person`,
+			},
+		},
+		{
+			"@type": "Person",
+			"@id": `${siteUrl}/#person`,
+			name: siteConfig.author,
+			url: siteUrl,
+			sameAs: siteConfig.socialLinks,
+		},
+	],
+};
+
+if (type === "article" && publishDate) {
+	jsonLD["@graph"].push({
+		"@type": "BlogPosting",
+		headline: title,
+		description: description,
+		datePublished: publishDate.toISOString(),
+		author: {
+			"@id": `${siteUrl}/#person`,
+		},
+		url: canonicalURL,
+		image: socialImageURL,
+		isPartOf: {
+			"@id": `${siteUrl}/#website`,
+		},
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": canonicalURL,
+		},
+	});
+}
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph / Facebook / Instagram / WhatsApp -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImageURL} />
@@ -30,10 +84,12 @@ const socialImageURL = new URL(image, siteUrl).href;
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialImageURL} />
 <meta name="twitter:creator" content={`@${siteConfig.author}`} />
 
 <meta name="author" content={siteConfig.author} />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />

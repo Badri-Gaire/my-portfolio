@@ -11,25 +11,35 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  type?: "website" | "article";
+  publishDate?: Date;
 }
 
 const {
   title = siteConfig.title,
   description = siteConfig.description,
   image,
+  type,
+  publishDate,
 } = Astro.props;
 ---
 
 <html lang={siteConfig.lang} class="dark">
   <head>
-    <Seo title={title} description={description} image={image} />
+    <Seo
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishDate={publishDate}
+    />
     <meta charset="utf-8" />
     <link rel="icon" type="image/webp" href="/images/badri2.webp" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body class="bg-background text-foreground flex flex-col min-h-screen">
-    <Snowfall color="#82C3D9" client:load/>
+    <Snowfall color="#82C3D9" client:load />
     <Navbar />
     <main class="grow container mx-auto px-4">
       <slot />
@@ -38,5 +48,3 @@ const {
     <ScrollToTop />
   </body>
 </html>
-
-<!--  -->
