@@ -1,6 +1,6 @@
 export const siteConfig = {
-  title: "My Portfolio",
-  description: "A personal portfolio built with Astro and Tailwind CSS",
+  title: "Badri Gaire | Frontend Developer",
+  description: "Frontend developer with a passion for creating beautiful and functional websites.",
   lang: "en-US",
   author: "Badri",
   site: "https://www.badrigaire.com.np",
