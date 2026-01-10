@@ -44,7 +44,7 @@ const {
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
   </head>
@@ -60,10 +60,13 @@ const {
       import { registerSW } from "virtual:pwa-register";
       registerSW({
         immediate: true,
-        onRegisteredSW(swUrl, r) {
+        onRegisteredSW(
+          swUrl: string,
+          r: ServiceWorkerRegistration | undefined,
+        ) {
           console.log(`Service Worker at: ${swUrl}`);
         },
-        onRegisterError(error) {
+        onRegisterError(error: any) {
           console.log("SW registration error", error);
         },
       });
