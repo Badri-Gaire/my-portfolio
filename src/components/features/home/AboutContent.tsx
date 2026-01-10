@@ -68,9 +68,9 @@ export default function AboutContent({
         variants={titleVariants}
         className="text-center mb-12 max-w-3xl mx-auto"
       >
-        <h1 className="text-5xl md:text-7xl font-black bg-clip-text text-transparent bg-linear-to-r from-orange-500 to-black dark:from-blue-300 dark:to-blue-500 mb-6">
+        <h2 className="text-5xl md:text-7xl font-black bg-clip-text text-transparent bg-linear-to-r from-orange-500 to-black dark:from-blue-300 dark:to-blue-500 mb-6">
           About Me
-        </h1>
+        </h2>
 
         {/* Description */}
         <motion.p
