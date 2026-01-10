@@ -1,6 +1,7 @@
 export const siteConfig = {
   title: "Badri Gaire | Frontend Developer",
-  description: "Frontend developer with a passion for creating beautiful and functional websites.",
+  description:
+    "Frontend developer experienced in building modern, SEO-friendly, and responsive websites using React, Next.js, Astro, and Tailwind with a focus on performance.",
   lang: "en-US",
   author: "Badri",
   site: "https://www.badrigaire.com.np",
