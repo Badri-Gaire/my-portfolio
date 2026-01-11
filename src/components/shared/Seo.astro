@@ -35,10 +35,67 @@ const jsonLD: { "@context": string; "@graph": any[] } = {
       },
     },
     {
-      "@type": "Person",
+      "@type": ["Person", "ProfessionalService"],
       "@id": `${siteUrl}/#person`,
       name: siteConfig.author,
       url: siteUrl,
+      jobTitle: "Frontend Developer",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bhairahawa",
+        addressRegion: "Rupandehi",
+        addressCountry: "NP",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "27.5084",
+        longitude: "83.4601",
+      },
+      areaServed: [
+        {
+          "@type": "City",
+          name: "Bhairahawa",
+        },
+        {
+          "@type": "City",
+          name: "Butwal",
+        },
+        {
+          "@type": "City",
+          name: "Siddharthanagar",
+        },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Web Development Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Website Development",
+              description:
+                "Custom website development using modern technologies",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Responsive Web Design",
+              description: "Mobile-friendly and responsive website design",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "SEO Optimization",
+              description: "Search engine optimization for better visibility",
+            },
+          },
+        ],
+      },
       sameAs: siteConfig.socialLinks,
     },
   ],
@@ -66,12 +123,15 @@ if (type === "article" && publishDate) {
 }
 ---
 
+---
+
 <title>{title}</title>
+
+<meta name="description" content={description} />
 <meta
   name="keywords"
-  content="Badri Gaire , Frontend Developer , React ,Nextjs, Astro, Typescript ,Tailwind Css , Ecommerce , Seo Optimization , Performance development , Responsive Design"
+  content="Badri Gaire , Frontend Developer , React ,Nextjs, Astro, Typescript ,Tailwind Css  , Seo Optimization , High performance website development , Responsive Design , Bhairahawa , Butwal , Nepal"
 />
-<meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph / Facebook / Instagram / WhatsApp -->
@@ -95,5 +155,19 @@ if (type === "article" && publishDate) {
 <meta name="twitter:creator" content={`@${siteConfig.author}`} />
 
 <meta name="author" content={siteConfig.author} />
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
+<meta
+  name="googlebot"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
+
+<!-- Geo targeting for local SEO -->
+<meta name="geo.region" content="NP-P3" />
+<meta name="geo.placename" content="Bhairahawa" />
+<meta name="geo.position" content="27.5084;83.4601" />
+<meta name="ICBM" content="27.5084, 83.4601" />
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />

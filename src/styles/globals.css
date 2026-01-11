@@ -6,6 +6,9 @@
   --color-secondary: var(--secondary);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+  /* Add shimmer animation */
+  --animate-shimmer: shimmer 2s infinite;
 }
 
 @layer base {
@@ -22,6 +25,16 @@
     --primary: #60a5fa;
     --secondary: #94a3b8;
   }
+  
+  /* Shimmer keyframes */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
 }
 
 body {
@@ -31,4 +44,3 @@ body {
 .test {
   @apply border-2 border-red-500;
 }
-

@@ -32,6 +32,31 @@ export default defineConfig({
               },
             },
           },
+          {
+            // Cache CSS and JS files
+            urlPattern: ({ request }) => 
+              request.destination === 'style' || request.destination === 'script',
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'assets-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+              },
+            },
+          },
+          {
+            // Cache fonts
+            urlPattern: ({ request }) => request.destination === 'font',
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'fonts-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+              },
+            },
+          },
         ],
       },
 
@@ -41,12 +66,17 @@ export default defineConfig({
       },
 
       manifest: {
-        name: "Badri's Portfolio",
-        short_name: 'Badri Portfolio',
-        description: 'A personal portfolio built with Astro and Tailwind CSS',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        name: 'Badri Gaire - Website Developer in Bhairahawa, Nepal',
+        short_name: 'Badri Gaire',
+        description: 'Professional website developer in Bhairahawa, Nepal. Specializing in modern, SEO-friendly, responsive websites using React, Next.js, Astro, and Tailwind CSS.',
+        theme_color: '#0f172a', 
+        background_color: '#0f172a',
         display: 'standalone',
+        start_url: '/',
+        scope: '/',
+        orientation: 'portrait-primary',
+        categories: ['business', 'portfolio', 'technology'],
+        lang: 'en-US',
 
         icons: [
           {
@@ -83,6 +113,13 @@ export default defineConfig({
     build: {
       cssCodeSplit: true,
       minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+          },
+        },
+      },
     },
   },
 
@@ -95,5 +132,12 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport',
+  },
+
+  // Image optimization
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
   },
 });
