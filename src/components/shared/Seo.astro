@@ -2,19 +2,19 @@
 import { siteConfig } from "../../utils/siteConfig";
 
 interface Props {
-	title: string;
-	description: string;
-	image?: string;
-	type?: "website" | "article";
-	publishDate?: Date;
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article";
+  publishDate?: Date;
 }
 
 const {
-	title,
-	description,
-	image = "/images/og-image.png",
-	type = "website",
-	publishDate,
+  title,
+  description,
+  image = "/images/og-image.png",
+  type = "website",
+  publishDate,
 } = Astro.props;
 
 const siteUrl = siteConfig.site;
@@ -22,51 +22,55 @@ const socialImageURL = new URL(image, siteUrl).href;
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
 
 const jsonLD: { "@context": string; "@graph": any[] } = {
-	"@context": "https://schema.org",
-	"@graph": [
-		{
-			"@type": "WebSite",
-			"@id": `${siteUrl}/#website`,
-			url: siteUrl,
-			name: siteConfig.title,
-			description: siteConfig.description,
-			publisher: {
-				"@id": `${siteUrl}/#person`,
-			},
-		},
-		{
-			"@type": "Person",
-			"@id": `${siteUrl}/#person`,
-			name: siteConfig.author,
-			url: siteUrl,
-			sameAs: siteConfig.socialLinks,
-		},
-	],
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteConfig.title,
+      description: siteConfig.description,
+      publisher: {
+        "@id": `${siteUrl}/#person`,
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: siteConfig.author,
+      url: siteUrl,
+      sameAs: siteConfig.socialLinks,
+    },
+  ],
 };
 
 if (type === "article" && publishDate) {
-	jsonLD["@graph"].push({
-		"@type": "BlogPosting",
-		headline: title,
-		description: description,
-		datePublished: publishDate.toISOString(),
-		author: {
-			"@id": `${siteUrl}/#person`,
-		},
-		url: canonicalURL,
-		image: socialImageURL,
-		isPartOf: {
-			"@id": `${siteUrl}/#website`,
-		},
-		mainEntityOfPage: {
-			"@type": "WebPage",
-			"@id": canonicalURL,
-		},
-	});
+  jsonLD["@graph"].push({
+    "@type": "BlogPosting",
+    headline: title,
+    description: description,
+    datePublished: publishDate.toISOString(),
+    author: {
+      "@id": `${siteUrl}/#person`,
+    },
+    url: canonicalURL,
+    image: socialImageURL,
+    isPartOf: {
+      "@id": `${siteUrl}/#website`,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalURL,
+    },
+  });
 }
 ---
 
 <title>{title}</title>
+<meta
+  name="keywords"
+  content="Badri Gaire , Frontend Developer , React ,Nextjs, Astro, Typescript ,Tailwind Css , Ecommerce , Seo Optimization , Performance development , Responsive Design"
+/>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
 
