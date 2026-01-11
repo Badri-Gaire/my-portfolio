@@ -24,12 +24,18 @@ const { title, description, image, link, tech = [] } = Astro.props;
           <img
             src={image}
             alt={title}
+            height={400}
+            width={400}
+            fetchpriority="auto"
             class=" object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
           <Image
             src={image}
+            fetchpriority="auto"
             alt={title}
+            height={400}
+            width={400}
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         )}
