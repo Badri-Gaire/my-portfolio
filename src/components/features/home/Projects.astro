@@ -8,14 +8,8 @@ import projectsData from "../../../data/projects.json";
 
 <SectionWrapper id="projects" className="py-10 lg:py-20">
   <SectionHeading title="Featured Projects" className="mb-12" />
-
-  <!-- <CustomCarousel client:only="react"> -->
+  <!-- Projects card -->
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-20">
     {projectsData.map((project) => <ProjectCard {...project} />)}
   </div>
-
-  <!-- </CustomCarousel> -->
 </SectionWrapper>
-
-
-

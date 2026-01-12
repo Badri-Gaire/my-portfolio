@@ -8,8 +8,19 @@ import TextReveal from "./TextReveal.tsx";
 import FadeIn from "./FadeIn.tsx";
 import ImageStorm from "./ImageStorm.tsx";
 import Lightning from "./Lightning.tsx";
+import BadriHeroImage from "../../../assets/images/badri2.webp";
+import { getImage } from "astro:assets";
+import type { GetImageResult } from "astro";
 
 const { name, role, summary } = userData;
+
+/**For the image to optimize at build time  */
+const image = (await getImage({
+  src: BadriHeroImage,
+  widths: [128, 256, 512, 768, 1024],
+  formats: ["webp"],
+  placeholder: "blur",
+})) as GetImageResult & { placeholder: string };
 ---
 
 <SectionWrapper
@@ -47,15 +58,21 @@ const { name, role, summary } = userData;
             >Contact Me</JellyButton
           >
         </div>
-
+        <!-- Storm toggle buttons -->
         <StormToggle client:load />
       </div>
+      <!-- Social links -->
       <div class="pt-4 animate-fade-in">
         <SocialLinks />
       </div>
     </div>
-
-    <ImageStorm client:load src="/images/badri2.webp" alt={name} />
+    <!-- Image and storm -->
+    <ImageStorm
+      client:load
+      src={image.src}
+      alt={name}
+      placeholder={image.placeholder}
+    />
     <Lightning client:load />
   </div>
 </SectionWrapper>
