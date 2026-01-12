@@ -25,8 +25,10 @@ export default function TextReveal({
           {line.split(" ").map((word, wordIdx) => (
             <motion.span
               key={`${word}-${wordIndex}`}
-              initial={{ y: "100%", opacity: 0 }}
+              initial={{ y: "100%", opacity: 1 }}
               animate={{ y: "0%", opacity: 1 }}
+              whileInView={{ y: [20, 0], opacity: [0, 1] }}
+              viewport={{once:true}}
               transition={{
                 duration: 0.7,
                 delay: wordIndex * wordDelay,

@@ -1,7 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
+type Props = Omit<HTMLMotionProps<"div">, "initial" | "animate" | "transition" | "viewport"> & {
   children: React.ReactNode;
   delay?: number;
 };
@@ -14,9 +14,11 @@ export default function FadeIn({
 }: Props) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 1, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay, ease: "easeOut" }}
+      style={{ opacity: 1 }}
+      viewport={{ once: true }}
       className={className}
       {...rest}
     >
