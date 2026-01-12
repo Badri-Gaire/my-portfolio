@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 ---
 
-<html lang={siteConfig.lang} class="dark">
+<html lang={siteConfig.lang} class="dark" dir="ltr">
   <head>
     <Seo
       title={title}
@@ -33,36 +33,27 @@ const {
       type={type}
       publishDate={publishDate}
     />
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Badri Gaire" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
   </head>
   <body class="bg-background text-foreground flex flex-col min-h-screen">
     <Snowfall color="#82C3D9" client:load />
+    <!-- Navbar all tabs -->
     <Navbar />
+    <!-- Main content pages -->
     <main class="grow container mx-auto px-4">
       <slot />
     </main>
+    <!-- Footer sections -->
     <Footer />
+    <!-- Button for navigation on top -->
     <ScrollToTop />
+    <!-- For PWA -->
     <script>
       import { registerSW } from "virtual:pwa-register";
       registerSW({
         immediate: true,
         onRegisteredSW(
           swUrl: string,
-          r: ServiceWorkerRegistration | undefined,
+          r: ServiceWorkerRegistration | undefined
         ) {
           console.log(`Service Worker at: ${swUrl}`);
         },

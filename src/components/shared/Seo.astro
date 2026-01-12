@@ -19,6 +19,7 @@ const {
 
 const siteUrl = siteConfig.site;
 const socialImageURL = new URL(image, siteUrl).href;
+/**Automatically shows canonical url in others pages */
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
 
 const jsonLD: { "@context": string; "@graph": any[] } = {
@@ -124,14 +125,34 @@ if (type === "article" && publishDate) {
 ---
 
 <title>{title}</title>
-
 <meta name="description" content={description} />
 <meta
   name="keywords"
   content="Badri Gaire , Frontend Developer , React ,Nextjs, Astro, Typescript ,Tailwind Css  , Seo Optimization , High performance website development , Responsive Design , Bhairahawa , Butwal , Nepal"
 />
+<meta name="author" content={siteConfig.author} />
+<!-- canonical url -->
 <link rel="canonical" href={canonicalURL} />
 
+<meta charset="utf-8" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<!-- For PWA -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Badri Gaire" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+/>
+<link rel="manifest" href="/site.webmanifest" />
+<!-- For Responsive -->
+<meta name="viewport" content="width=device-width" />
+<!-- Astro version -->
+<meta name="generator" content={Astro.generator} />
 <!-- Open Graph / Facebook / Instagram / WhatsApp -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
@@ -143,7 +164,6 @@ if (type === "article" && publishDate) {
 <meta property="og:image:alt" content={title} />
 <meta property="og:site_name" content={siteConfig.title} />
 <meta property="og:locale" content={siteConfig.lang} />
-
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
@@ -151,8 +171,7 @@ if (type === "article" && publishDate) {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialImageURL} />
 <meta name="twitter:creator" content={`@${siteConfig.author}`} />
-
-<meta name="author" content={siteConfig.author} />
+<!-- for google-bot -->
 <meta
   name="robots"
   content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
@@ -161,11 +180,10 @@ if (type === "article" && publishDate) {
   name="googlebot"
   content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
 />
-
 <!-- Geo targeting for local SEO -->
 <meta name="geo.region" content="NP-P3" />
 <meta name="geo.placename" content="Bhairahawa" />
 <meta name="geo.position" content="27.5084;83.4601" />
 <meta name="ICBM" content="27.5084, 83.4601" />
-
+<!-- Json Ld for more details -->
 <script type="application/ld+json" set:html={JSON.stringify(jsonLD)} />
