@@ -33,6 +33,7 @@ const {
       type={type}
       publishDate={publishDate}
     />
+    <!-- is:inline	Prevents Astro from bundling the CSS.	Eliminates "Render Blocking" CSS requests. -->
     <style is:inline>
       /* Immediate rendering for the body and headers to prevent white screens */
       body,
