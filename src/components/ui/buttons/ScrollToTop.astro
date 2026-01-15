@@ -7,7 +7,6 @@ import { ArrowUp } from "lucide-react";
     aria-label="Scroll to Top"
     class="fixed bottom-10 right-8 h-12 w-8 flex items-center justify-center rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200 shadow-lg transition-all duration-500 transform translate-y-20 opacity-0 z-50 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 hover:shadow-xl group"
 >
-    <!-- Thin modern arrow -->
     <div class="relative h-full w-full flex items-center justify-center">
         <ArrowUp
             className="w-4 h-4 stroke-[3px] transition-transform duration-300 group-hover:-translate-y-1"
@@ -16,23 +15,54 @@ import { ArrowUp } from "lucide-react";
 </button>
 
 <script>
-    const scrollToTopBtn = document.getElementById("scroll-to-top");
+    function initScrollToTop() {
+        const scrollToTopBtn = document.getElementById("scroll-to-top") as HTMLButtonElement | null;
+        if (!scrollToTopBtn) return;
 
-    const toggleVisibility = () => {
-        if (window.scrollY > 300) {
-            scrollToTopBtn?.classList.remove("translate-y-20", "opacity-0");
-        } else {
-            scrollToTopBtn?.classList.add("translate-y-20", "opacity-0");
-        }
-    };
+        let isVisible = false;
+        let ticking = false;
+        
+        const toggleVisibility = () => {
+            const shouldShow = window.scrollY > 300;
+            
+            if (shouldShow !== isVisible) {
+                isVisible = shouldShow;
+                
+                if (shouldShow) {
+                    scrollToTopBtn.classList.remove("translate-y-20", "opacity-0");
+                } else {
+                    scrollToTopBtn.classList.add("translate-y-20", "opacity-0");
+                }
+            }
+            
+            ticking = false;
+        };
 
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    };
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(toggleVisibility);
+                ticking = true;
+            }
+        };
 
-    window.addEventListener("scroll", toggleVisibility);
-    scrollToTopBtn?.addEventListener("click", scrollToTop);
+        const scrollToTop = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        scrollToTopBtn.addEventListener("click", scrollToTop);
+        
+        // Check initial position
+        toggleVisibility();
+    }
+
+    //  Defer initialization
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(initScrollToTop, { timeout: 2000 });
+    } else {
+        setTimeout(initScrollToTop, 2000);
+    }
 </script>

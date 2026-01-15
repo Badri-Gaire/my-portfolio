@@ -4,8 +4,8 @@ import "../styles/globals.css";
 import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
 import Seo from "../components/shared/Seo.astro";
-import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
-import Snowfall from "react-snowfall";
+// import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
+// import Snowfall from "react-snowfall";
 
 interface Props {
   title?: string;
@@ -13,7 +13,7 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   publishDate?: Date;
-  heroImage: string;
+  heroImage?: string;
 }
 
 const {
@@ -26,6 +26,7 @@ const {
 } = Astro.props;
 ---
 
+<!DOCTYPE html>
 <html lang={siteConfig.lang} class="dark" dir="ltr">
   <head>
     <Seo
@@ -36,12 +37,18 @@ const {
       publishDate={publishDate}
     />
 
-    {
-      heroImage && (
-        <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
-      )
-    }
-    <!-- is:inline	Prevents Astro from bundling the CSS.	Eliminates "Render Blocking" CSS requests. -->
+    <!-- Preload hero image for LCP optimization -->
+    {heroImage && (
+      <link 
+        rel="preload" 
+        as="image" 
+        href={heroImage} 
+        fetchpriority="high"
+        type="image/webp"
+      />
+    )}
+
+    <!-- Inline critical CSS for immediate rendering -->
     <style is:inline>
       /* Immediate rendering for the body and headers to prevent white screens */
       body,
@@ -62,18 +69,31 @@ const {
           "Helvetica Neue",
           sans-serif;
       }
+      
+      /* Prevent layout shift during font loading */
+      body {
+        font-display: swap;
+      }
+
+      /* Optional: Add smooth scroll behavior */
+      html {
+        scroll-behavior: smooth;
+      }
     </style>
 
+    <!-- Preconnect to external font resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Defer non-critical fonts -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,700;1,700&family=Quicksand:wght@300..700&display=swap"
       media="print"
-      onload="this.onload=null;this.setAttribute('media', 'all')"
+      onload="this.media='all'"
     />
 
+    <!-- Fallback for users without JavaScript -->
     <noscript>
       <link
         href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,700;1,700&family=Quicksand:wght@300..700&display=swap"
@@ -81,34 +101,58 @@ const {
       />
     </noscript>
   </head>
+  
   <body class="bg-background text-foreground flex flex-col min-h-screen">
-    <Snowfall color="#82C3D9" client:idle />
-    <!-- Navbar all tabs -->
+    <!-- Snowfall effect - only on desktop and when idle -->
+    <!-- <Snowfall 
+      color="#82C3D9" 
+      client:media="(min-width: 768px)" 
+    /> -->
+    
+    <!-- Navigation bar -->
     <Navbar />
-    <!-- Main content pages -->
+    
+    <!-- Main content area -->
     <main class="grow container mx-auto px-4">
       <slot />
     </main>
-    <!-- Footer sections -->
+    
+    <!-- Footer section -->
     <Footer />
-    <!-- Button for navigation on top -->
-    <ScrollToTop />
-    <!-- For PWA -->
+    
+    <!-- Scroll to top button -->
+    <!-- <ScrollToTop /> -->
+    
+    <!-- Progressive Web App registration - deferred -->
     <script>
-      // Defer until after page load
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(() => {
-          import("virtual:pwa-register").then(({ registerSW }) => {
-            registerSW({ immediate: false });
-          });
-        });
-      } else {
-        setTimeout(() => {
-          import("virtual:pwa-register").then(({ registerSW }) => {
-            registerSW({ immediate: false });
-          });
-        }, 2000);
-      }
+      // Wait until page is fully loaded before registering PWA
+      window.addEventListener('load', () => {
+        // Use requestIdleCallback for better performance
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(() => {
+            import("virtual:pwa-register").then(({ registerSW }) => {
+              registerSW({ 
+                immediate: false,
+                onNeedRefresh() {
+                  // Optional: Notify user about available update
+                  console.log('New content available, please refresh.');
+                },
+                onOfflineReady() {
+                  // Optional: Notify user that app works offline
+                  console.log('App is ready to work offline.');
+                }
+              });
+            });
+          }, { timeout: 3000 });
+        } else {
+          // Fallback for browsers without requestIdleCallback
+          setTimeout(() => {
+            import("virtual:pwa-register").then(({ registerSW }) => {
+              registerSW({ immediate: false });
+            });
+          }, 3000);
+        }
+      });
     </script>
   </body>
 </html>
