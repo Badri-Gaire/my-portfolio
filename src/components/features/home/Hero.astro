@@ -32,26 +32,26 @@ const image = (await getImage({
   >
     <div class="flex-1 space-y-6">
       <TextReveal
-        client:load
+        client:visible
         text={`Hi\nI'm ${name}`}
         tag="h1"
         className="text-4xl md:text-6xl font-bold uppercase tracking-tight overflow-hidden pb-5 "
       />
       <TextReveal
-        client:load
+        client:visible
         text={role}
         tag="h2"
         className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-200 overflow-hidden pb-5"
         wordDelay={0.09}
       />
       <FadeIn
-        client:load
+        client:visible
         className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl"
       >
         {summary}
       </FadeIn>
       <div class="flex gap-4 pt-4">
-        <JellyButton client:load href="#projects">View Projects</JellyButton>
+        <JellyButton client:visible href="#projects">View Projects</JellyButton>
         <!-- hidden for now -->
         <div class="hidden">
           <JellyButton client:load href="/contact" variant="outline"
@@ -59,7 +59,7 @@ const image = (await getImage({
           >
         </div>
         <!-- Storm toggle buttons -->
-        <StormToggle client:load />
+        <StormToggle client:visible />
       </div>
       <!-- Social links -->
       <div class="pt-4 animate-fade-in">
@@ -73,6 +73,6 @@ const image = (await getImage({
       alt={name}
       placeholder={image.placeholder}
     />
-    <Lightning client:load />
+    <Lightning client:visible />
   </div>
 </SectionWrapper>

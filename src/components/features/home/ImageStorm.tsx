@@ -41,8 +41,9 @@ export default function ImageStorm({
           className={`w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-900 shadow-2xl transition-opacity duration-700 group-hover:scale-110 ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
-          loading="lazy"
-          decoding="async"
+          loading="eager"
+          decoding="sync"
+          fetchPriority="high"
         />
 
         {/* Animated glow background */}
