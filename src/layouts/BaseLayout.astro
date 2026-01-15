@@ -4,8 +4,8 @@ import "../styles/globals.css";
 import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
 import Seo from "../components/shared/Seo.astro";
-// import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
-// import Snowfall from "react-snowfall";
+import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
+import Snowfall from "react-snowfall";
 
 interface Props {
   title?: string;
@@ -13,7 +13,7 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   publishDate?: Date;
-  heroImage?: string;
+  heroImage: string;
 }
 
 const {
@@ -26,7 +26,6 @@ const {
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
 <html lang={siteConfig.lang} class="dark" dir="ltr">
   <head>
     <Seo
@@ -37,18 +36,18 @@ const {
       publishDate={publishDate}
     />
 
-    <!-- Preload hero image for LCP optimization -->
-    {heroImage && (
-      <link 
-        rel="preload" 
-        as="image" 
-        href={heroImage} 
-        fetchpriority="high"
-        type="image/webp"
-      />
-    )}
-
-    <!-- Inline critical CSS for immediate rendering -->
+    {
+      heroImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={heroImage}
+          fetchpriority="high"
+          type="image/webp"
+        />
+      )
+    }
+    <!-- is:inline	Prevents Astro from bundling the CSS.	Eliminates "Render Blocking" CSS requests. -->
     <style is:inline>
       /* Immediate rendering for the body and headers to prevent white screens */
       body,
@@ -69,7 +68,6 @@ const {
           "Helvetica Neue",
           sans-serif;
       }
-      
       /* Prevent layout shift during font loading */
       body {
         font-display: swap;
@@ -80,78 +78,51 @@ const {
         scroll-behavior: smooth;
       }
     </style>
-
-    <!-- Preconnect to external font resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Defer non-critical fonts -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,700;1,700&family=Quicksand:wght@300..700&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-
-    <!-- Fallback for users without JavaScript -->
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,700;1,700&family=Quicksand:wght@300..700&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
   </head>
-  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,700;1,700&family=Quicksand:wght@300..700&display=swap"
+    media="print"
+    onload="this.onload=null;this.setAttribute('media', 'all')"
+  />
+
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,700;1,700&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
+
   <body class="bg-background text-foreground flex flex-col min-h-screen">
-    <!-- Snowfall effect - only on desktop and when idle -->
-    <!-- <Snowfall 
-      color="#82C3D9" 
-      client:media="(min-width: 768px)" 
-    /> -->
-    
-    <!-- Navigation bar -->
+    <Snowfall color="#82C3D9" client:idle />
+    <!-- Navbar all tabs -->
     <Navbar />
-    
-    <!-- Main content area -->
+    <!-- Main content pages -->
     <main class="grow container mx-auto px-4">
       <slot />
     </main>
-    
-    <!-- Footer section -->
+    <!-- Footer sections -->
     <Footer />
-    
-    <!-- Scroll to top button -->
-    <!-- <ScrollToTop /> -->
-    
-    <!-- Progressive Web App registration - deferred -->
+    <!-- Button for navigation on top -->
+    <ScrollToTop />
+    <!-- For PWA -->
     <script>
-      // Wait until page is fully loaded before registering PWA
-      window.addEventListener('load', () => {
-        // Use requestIdleCallback for better performance
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(() => {
-            import("virtual:pwa-register").then(({ registerSW }) => {
-              registerSW({ 
-                immediate: false,
-                onNeedRefresh() {
-                  // Optional: Notify user about available update
-                  console.log('New content available, please refresh.');
-                },
-                onOfflineReady() {
-                  // Optional: Notify user that app works offline
-                  console.log('App is ready to work offline.');
-                }
-              });
-            });
-          }, { timeout: 3000 });
-        } else {
-          // Fallback for browsers without requestIdleCallback
-          setTimeout(() => {
-            import("virtual:pwa-register").then(({ registerSW }) => {
-              registerSW({ immediate: false });
-            });
-          }, 3000);
-        }
+      import { registerSW } from "virtual:pwa-register";
+      registerSW({
+        immediate: true,
+        onRegisteredSW(
+          swUrl: string,
+          r: ServiceWorkerRegistration | undefined
+        ) {
+          console.log(`Service Worker at: ${swUrl}`);
+        },
+        onRegisterError(error: any) {
+          console.log("SW registration error", error);
+        },
       });
     </script>
   </body>
