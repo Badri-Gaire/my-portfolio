@@ -8,19 +8,17 @@ import TextReveal from "./TextReveal.tsx";
 import FadeIn from "./FadeIn.tsx";
 import ImageStorm from "./ImageStorm.tsx";
 import Lightning from "./Lightning.tsx";
-import BadriHeroImage from "../../../assets/images/badri2.webp";
-import { getImage } from "astro:assets";
-import type { GetImageResult } from "astro";
 
 const { name, role, summary } = userData;
 
-/**For the image to optimize at build time  */
-const image = (await getImage({
-  src: BadriHeroImage,
-  widths: [128, 256, 512, 768, 1024],
-  formats: ["webp"],
-  placeholder: "blur",
-})) as GetImageResult & { placeholder: string };
+interface Props {
+  imageData: {
+    src: string;
+    placeholder: string;
+  };
+}
+
+const { imageData } = Astro.props;
 ---
 
 <SectionWrapper
@@ -68,10 +66,10 @@ const image = (await getImage({
     </div>
     <!-- Image and storm -->
     <ImageStorm
-      client:load
-      src={image.src}
+      client:visible
+      src={imageData.src}
       alt={name}
-      placeholder={image.placeholder}
+      placeholder={imageData.placeholder}
     />
     <Lightning client:visible />
   </div>

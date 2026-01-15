@@ -42,7 +42,7 @@ export default function ImageStorm({
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
           loading="eager"
-          decoding="sync"
+          decoding="async"
           fetchPriority="high"
         />
 

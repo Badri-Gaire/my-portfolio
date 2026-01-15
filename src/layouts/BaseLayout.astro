@@ -13,6 +13,7 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   publishDate?: Date;
+  heroImage: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   image,
   type,
   publishDate,
+  heroImage,
 } = Astro.props;
 ---
 
@@ -33,6 +35,12 @@ const {
       type={type}
       publishDate={publishDate}
     />
+
+    {
+      heroImage && (
+        <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
+      )
+    }
     <!-- is:inline	Prevents Astro from bundling the CSS.	Eliminates "Render Blocking" CSS requests. -->
     <style is:inline>
       /* Immediate rendering for the body and headers to prevent white screens */
@@ -74,7 +82,7 @@ const {
     </noscript>
   </head>
   <body class="bg-background text-foreground flex flex-col min-h-screen">
-    <Snowfall color="#82C3D9" client:load />
+    <Snowfall color="#82C3D9" client:idle />
     <!-- Navbar all tabs -->
     <Navbar />
     <!-- Main content pages -->
@@ -87,19 +95,20 @@ const {
     <ScrollToTop />
     <!-- For PWA -->
     <script>
-      import { registerSW } from "virtual:pwa-register";
-      registerSW({
-        immediate: true,
-        onRegisteredSW(
-          swUrl: string,
-          r: ServiceWorkerRegistration | undefined
-        ) {
-          console.log(`Service Worker at: ${swUrl}`);
-        },
-        onRegisterError(error: any) {
-          console.log("SW registration error", error);
-        },
-      });
+      // Defer until after page load
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(() => {
+          import("virtual:pwa-register").then(({ registerSW }) => {
+            registerSW({ immediate: false });
+          });
+        });
+      } else {
+        setTimeout(() => {
+          import("virtual:pwa-register").then(({ registerSW }) => {
+            registerSW({ immediate: false });
+          });
+        }, 2000);
+      }
     </script>
   </body>
 </html>

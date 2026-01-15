@@ -34,10 +34,10 @@ import { Menu, X } from "lucide-react";
         aria-label="Toggle Menu"
       >
         <div id="menu-icon-open" class="block">
-          <Menu className="size-6" client:load />
+          <Menu className="size-6" client:idle />
         </div>
         <div id="menu-icon-close" class="hidden">
-          <X className="size-6" client:load />
+          <X className="size-6" client:idle />
         </div>
       </button>
     </div>

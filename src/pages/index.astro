@@ -6,11 +6,21 @@ import About from "../components/features/home/About.astro";
 import Experience from "../components/features/home/Experience.astro";
 import Projects from "../components/features/home/Projects.astro";
 import BlogCard from "../components/features/home/BlogCard.astro";
+import { getImage } from "astro:assets";
+import BadriHeroImage from "../assets/images/badri2.webp";
+import type { GetImageResult } from "astro";
+
+const heroImage = (await getImage({
+  src: BadriHeroImage,
+  width: 768,
+  format: "webp",
+  placeholder: "blur",
+})) as GetImageResult & { placeholder: string };
 ---
 
-<BaseLayout>
+<BaseLayout heroImage={heroImage.src}>
   <!-- Images and title -->
-  <Hero />
+  <Hero imageData={heroImage} />
   <!-- All skills sections -->
   <Skills />
   <!-- Experiences sections -->
@@ -23,47 +33,60 @@ import BlogCard from "../components/features/home/BlogCard.astro";
   <About />
 </BaseLayout>
 
+<!--  Defer GSAP animations -->
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+  // Only run after page is interactive
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAnimations);
+  } else {
+    requestIdleCallback
+      ? requestIdleCallback(initAnimations)
+      : setTimeout(initAnimations, 1);
+  }
 
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  function initAnimations() {
+    import("gsap").then(({ gsap }) => {
+      import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+        import("gsap/ScrollToPlugin").then(({ ScrollToPlugin }) => {
+          gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  // Scroll animations
-  const animateElements = document.querySelectorAll(".animate-on-scroll");
+          const animateElements =
+            document.querySelectorAll(".animate-on-scroll");
+          animateElements.forEach((element) => {
+            gsap.to(element, {
+              scrollTrigger: {
+                trigger: element,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+              },
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+            });
+          });
 
-  animateElements.forEach((element) => {
-    gsap.to(element, {
-      scrollTrigger: {
-        trigger: element,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-      y: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power3.out",
-    });
-  });
-
-  // Smooth scrolling for anchor links
-  const anchors = document.querySelectorAll('a[href^="#"]');
-  anchors.forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      e.preventDefault();
-      const currentAnchor = e.currentTarget as HTMLAnchorElement;
-      const targetId = currentAnchor.getAttribute("href");
-      if (!targetId || targetId === "#") return;
-
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        gsap.to(window, {
-          duration: 1,
-          scrollTo: { y: targetElement, offsetY: 80 },
-          ease: "power2.inOut",
+          // Smooth scroll
+          const anchors = document.querySelectorAll('a[href^="#"]');
+          anchors.forEach((anchor) => {
+            anchor.addEventListener("click", (e) => {
+              e.preventDefault();
+              const targetId = (
+                e.currentTarget as HTMLAnchorElement
+              ).getAttribute("href");
+              if (!targetId || targetId === "#") return;
+              const targetElement = document.querySelector(targetId);
+              if (targetElement) {
+                gsap.to(window, {
+                  duration: 1,
+                  scrollTo: { y: targetElement, offsetY: 80 },
+                  ease: "power2.inOut",
+                });
+              }
+            });
+          });
         });
-      }
+      });
     });
-  });
+  }
 </script>
