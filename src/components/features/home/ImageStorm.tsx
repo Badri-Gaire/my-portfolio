@@ -29,6 +29,7 @@ export default function ImageStorm({
           <img
             src={placeholder}
             alt="placeholder"
+            aria-hidden='true'
             className="absolute inset-0 w-full h-full object-cover blur-xl scale-105"
           />
         )}

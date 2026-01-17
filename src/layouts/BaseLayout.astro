@@ -6,6 +6,7 @@ import Footer from "../components/layout/Footer.astro";
 import Seo from "../components/shared/Seo.astro";
 import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
 import Snowfall from "react-snowfall";
+import { getImage } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -13,7 +14,8 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   publishDate?: Date;
-  heroImage: string;
+  heroImage: ImageMetadata;
+  placeholder?: string;
 }
 
 const {
@@ -23,7 +25,20 @@ const {
   type,
   publishDate,
   heroImage,
+  placeholder,
 } = Astro.props;
+
+let optimizedSrc: string | undefined;
+
+if (heroImage) {
+  const optimized = await getImage({
+    src: heroImage,
+    width: 768,
+    format: "webp",
+    placeholder: "blur",
+  });
+  optimizedSrc = optimized.src;
+}
 ---
 
 <html lang={siteConfig.lang} class="dark" dir="ltr">
@@ -35,18 +50,19 @@ const {
       type={type}
       publishDate={publishDate}
     />
-
+    <!-- Preload image -->
     {
       heroImage && (
         <link
           rel="preload"
           as="image"
-          href={heroImage}
-          fetchpriority="high"
+          href={optimizedSrc}
           type="image/webp"
+          fetchpriority="high"
         />
       )
     }
+
     <!-- is:inline	Prevents Astro from bundling the CSS.	Eliminates "Render Blocking" CSS requests. -->
     <style is:inline>
       /* Immediate rendering for the body and headers to prevent white screens */

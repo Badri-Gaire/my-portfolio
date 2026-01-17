@@ -6,8 +6,8 @@ import About from "../components/features/home/About.astro";
 import Experience from "../components/features/home/Experience.astro";
 import Projects from "../components/features/home/Projects.astro";
 import BlogCard from "../components/features/home/BlogCard.astro";
-import { getImage } from "astro:assets";
 import BadriHeroImage from "../assets/images/badri2.webp";
+import { getImage } from "astro:assets";
 import type { GetImageResult } from "astro";
 
 const heroImage = (await getImage({
@@ -18,7 +18,7 @@ const heroImage = (await getImage({
 })) as GetImageResult & { placeholder: string };
 ---
 
-<BaseLayout heroImage={heroImage.src}>
+<BaseLayout heroImage={BadriHeroImage}>
   <!-- Images and title -->
   <Hero imageData={heroImage} />
   <!-- All skills sections -->

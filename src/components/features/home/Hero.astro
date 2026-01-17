@@ -65,12 +65,7 @@ const { imageData } = Astro.props;
       </div>
     </div>
     <!-- Image and storm -->
-    <ImageStorm
-      client:visible
-      src={imageData.src}
-      alt={name}
-      placeholder={imageData.placeholder}
-    />
+    <ImageStorm client:visible src={imageData.src} placeholder={imageData.placeholder} alt={name} />
     <Lightning client:visible />
   </div>
 </SectionWrapper>
