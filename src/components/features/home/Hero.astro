@@ -52,7 +52,7 @@ const { imageData } = Astro.props;
         <JellyButton client:visible href="#projects">View Projects</JellyButton>
         <!-- hidden for now -->
         <div class="hidden">
-          <JellyButton client:load href="/contact" variant="outline"
+          <JellyButton client:visible href="/contact" variant="outline"
             >Contact Me</JellyButton
           >
         </div>
@@ -65,7 +65,12 @@ const { imageData } = Astro.props;
       </div>
     </div>
     <!-- Image and storm -->
-    <ImageStorm client:visible src={imageData.src} placeholder={imageData.placeholder} alt={name} />
+    <ImageStorm
+      client:load
+      src={imageData.src}
+      placeholder={imageData.placeholder}
+      alt={name}
+    />
     <Lightning client:visible />
   </div>
 </SectionWrapper>

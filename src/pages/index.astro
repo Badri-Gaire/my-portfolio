@@ -8,19 +8,29 @@ import Projects from "../components/features/home/Projects.astro";
 import BlogCard from "../components/features/home/BlogCard.astro";
 import BadriHeroImage from "../assets/images/badri2.webp";
 import { getImage } from "astro:assets";
-import type { GetImageResult } from "astro";
 
-const heroImage = (await getImage({
+const heroImage = await getImage({
   src: BadriHeroImage,
-  width: 768,
+  width: 1080,
   format: "webp",
-  placeholder: "blur",
-})) as GetImageResult & { placeholder: string };
+});
+
+const blurPlaceholder = await getImage({
+  src: BadriHeroImage,
+  width: 20,
+  quality: 20,
+  format: "webp",
+});
+
+const imageProps = {
+  src: heroImage.src,
+  placeholder: blurPlaceholder.src,
+};
 ---
 
 <BaseLayout heroImage={BadriHeroImage}>
   <!-- Images and title -->
-  <Hero imageData={heroImage} />
+  <Hero imageData={imageProps} />
   <!-- All skills sections -->
   <Skills />
   <!-- Experiences sections -->
