@@ -108,6 +108,21 @@ if (heroImage) {
       })(window, document, "script", "dataLayer", gtmId);
     </script>
     <!-- End Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.gaId}`}
+    ></script>
+    <script is:inline define:vars={{ gaId: siteConfig.gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", gaId);
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" /><link
       rel="preconnect"
       href="https://fonts.gstatic.com"

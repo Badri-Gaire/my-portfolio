@@ -11,6 +11,7 @@ export const siteConfig = {
     "https://github.com/Badri-Gaire",
   ],
   gtmId: "GTM-W5SD395J",
+  gaId: "G-QJ0ZE2JK62",
 };
 
 export const menuLinks = [
