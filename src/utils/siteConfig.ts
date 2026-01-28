@@ -10,6 +10,7 @@ export const siteConfig = {
     "https://www.linkedin.com/in/badri-gaire-85881a334/",
     "https://github.com/Badri-Gaire",
   ],
+  gtmId: "GTM-W5SD395J",
 };
 
 export const menuLinks = [
