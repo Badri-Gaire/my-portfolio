@@ -1,76 +1,102 @@
 ---
+import { Image } from "astro:assets";
 import SectionWrapper from "../../ui/section/SectionWrapper.astro";
 import JellyButton from "../../ui/buttons/JellyButton";
-import StormToggle from "../../ui/buttons/StormToggle";
 import SocialLinks from "../../shared/SocialLinks.astro";
 import userData from "../../../data/user.json";
-import TextReveal from "./TextReveal.tsx";
-import FadeIn from "./FadeIn.tsx";
-import ImageStorm from "./ImageStorm.tsx";
-import Lightning from "./Lightning.tsx";
+import heroImage from "../../../assets/images/badri-arthero.webp";
 
-const { name, role, summary } = userData;
-
-interface Props {
-  imageData: {
-    src: string;
-    placeholder: string;
-  };
-}
-
-const { imageData } = Astro.props;
+const { summary } = userData;
 ---
 
 <SectionWrapper
-  className=" flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden relative"
+  className="relative flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden"
   id="home"
 >
+  {/* Large Background Text */}
   <div
-    class="flex flex-col md:flex-row items-center gap-12 w-full z-10 relative"
+    class="hero-bg-text absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-[0.03] dark:opacity-[0.05]"
   >
-    <div class="flex-1 space-y-6">
-      <TextReveal
-        client:visible
-        text={`Hi\nI'm ${name}`}
-        tag="h1"
-        className="text-4xl md:text-6xl font-bold uppercase tracking-tight overflow-hidden pb-5 "
-      />
-      <TextReveal
-        client:visible
-        text={role}
-        tag="h2"
-        className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-200 overflow-hidden pb-5"
-        wordDelay={0.09}
-      />
-      <FadeIn
-        client:visible
-        className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl"
-      >
-        {summary}
-      </FadeIn>
-      <div class="flex gap-4 pt-4">
-        <JellyButton client:visible href="#projects">View Projects</JellyButton>
-        <!-- hidden for now -->
-        <div class="hidden">
-          <JellyButton client:visible href="/contact" variant="outline"
-            >Contact Me</JellyButton
+    <h2
+      class="text-[8vw] font-black uppercase tracking-tighter whitespace-nowrap"
+    >
+      Frontend Developer
+    </h2>
+  </div>
+
+  <div class="container mx-auto px-4 z-10">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      {/* Text Content */}
+      <div class="flex-1 space-y-8 order-2 lg:order-1 text-center lg:text-left">
+        <div class="space-y-4">
+          <h1
+            class="hero-title text-4xl md:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-foreground opacity-0"
           >
+            Building digital <br />
+            <span class="text-primary italic">experiences</span> that <br />
+            inspire & convert.
+          </h1>
         </div>
-        <!-- Storm toggle buttons -->
-        <StormToggle client:visible />
+
+        <p
+          class="hero-description text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 opacity-0"
+        >
+          {summary}
+        </p>
+
+        <div
+          class="hero-cta flex flex-wrap justify-center lg:justify-start items-center gap-6 pt-4 opacity-0"
+        >
+          <JellyButton client:visible href="#projects">
+            See my works
+          </JellyButton>
+          <div class="social-hero">
+            <SocialLinks />
+          </div>
+        </div>
       </div>
-      <!-- Social links -->
-      <div class="pt-4 animate-fade-in">
-        <SocialLinks />
+
+      {/* Hero Image */}
+      <div
+        class="flex-1 order-1 lg:order-2 hero-image-container relative opacity-0"
+      >
+        <div
+          class="relative w-full max-w-md mx-auto aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10"
+        >
+          <Image
+            src={heroImage}
+            alt="Badri Gaire"
+            width={600}
+            height={750}
+            format="avif"
+            quality={90}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700 scale-105"
+          />
+          <div
+            class="absolute inset-0 bg-linear-to-t from-background/40 to-transparent"
+          >
+          </div>
+        </div>
+
+        {/* Decorative elements */}
+        <div
+          class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/20 blur-3xl rounded-full -z-10 animate-pulse"
+        >
+        </div>
+        <div
+          class="absolute -top-6 -left-6 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full -z-10 animate-pulse"
+          style="animation-delay: 2s;"
+        >
+        </div>
       </div>
     </div>
-    <!-- Image and storm -->
-    <ImageStorm
-      client:load
-      src={imageData.src}
-      placeholder={imageData.placeholder}
-      alt={name}
-    />
-    <Lightning client:visible />
   </div>
 </SectionWrapper>
+
+<style>
+  .italic {
+    font-style: italic;
+  }
+</style>

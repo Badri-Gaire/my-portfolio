@@ -6,46 +6,19 @@ import About from "../components/features/home/About.astro";
 import Experience from "../components/features/home/Experience.astro";
 import Projects from "../components/features/home/Projects.astro";
 import BlogCard from "../components/features/home/BlogCard.astro";
-import BadriHeroImage from "../assets/images/badri2.webp";
-import { getImage } from "astro:assets";
-
-const heroImage = await getImage({
-  src: BadriHeroImage,
-  width: 600,
-  format: "avif",
-});
-
-const blurPlaceholder = await getImage({
-  src: BadriHeroImage,
-  width: 20,
-  quality: 10,
-  format: "avif",
-});
-
-const imageProps = {
-  src: heroImage.src,
-  placeholder: blurPlaceholder.src,
-};
+import BadriHeroImage from "../assets/images/badri-arthero.webp";
 ---
 
 <BaseLayout heroImage={BadriHeroImage}>
-  <!-- Images and title -->
-  <Hero imageData={imageProps} />
-  <!-- All skills sections -->
+  <Hero />
   <Skills />
-  <!-- Experiences sections -->
   <Experience />
-  <!-- ALl my projects -->
   <Projects />
-  <!-- All my blog -->
   <BlogCard home="true" />
-  <!-- About me -->
   <About />
 </BaseLayout>
 
-<!--  Defer GSAP animations -->
 <script>
-  // Only run after page is interactive
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initAnimations);
   } else {
@@ -60,6 +33,25 @@ const imageProps = {
         import("gsap/ScrollToPlugin").then(({ ScrollToPlugin }) => {
           gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+          // Hero Animations
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+          tl.to(".hero-bg-text", { opacity: 0.05, duration: 2 })
+            .to(
+              ".hero-image-container",
+              { opacity: 1, y: 0, duration: 1.2 },
+              "-=1.5",
+            )
+            .to(".hero-badge", { opacity: 1, y: 0, duration: 0.8 }, "-=0.8")
+            .to(".hero-title", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
+            .to(
+              ".hero-description",
+              { opacity: 1, y: 0, duration: 0.8 },
+              "-=0.6",
+            )
+            .to(".hero-cta", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6");
+
+          // Scroll Animations
           const animateElements =
             document.querySelectorAll(".animate-on-scroll");
           animateElements.forEach((element) => {

@@ -5,7 +5,6 @@ import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
 import Seo from "../components/shared/Seo.astro";
 import ScrollToTop from "../components/ui/buttons/ScrollToTop.astro";
-import Snowfall from "react-snowfall";
 import { getImage } from "astro:assets";
 
 interface Props {
@@ -142,7 +141,6 @@ if (heroImage) {
   </noscript>
 
   <body class="bg-background text-foreground flex flex-col min-h-screen">
-    <Snowfall color="#82C3D9" client:idle />
     <!-- Navbar all tabs -->
     <Navbar />
     <!-- Main content pages -->
