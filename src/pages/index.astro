@@ -7,10 +7,18 @@ import Experience from "../components/features/home/Experience.astro";
 import Projects from "../components/features/home/Projects.astro";
 import BlogCard from "../components/features/home/BlogCard.astro";
 import BadriHeroImage from "../assets/images/badri-arthero.webp";
+import { getImage } from "astro:assets";
+
+const blurPlaceholder = await getImage({
+  src: BadriHeroImage,
+  width: 20,
+  quality: 50,
+  format: "webp",
+});
 ---
 
 <BaseLayout heroImage={BadriHeroImage}>
-  <Hero />
+  <Hero placeholder={blurPlaceholder.src} />
   <Skills />
   <Experience />
   <Projects />
@@ -36,20 +44,20 @@ import BadriHeroImage from "../assets/images/badri-arthero.webp";
           // Hero Animations
           const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-          tl.to(".hero-bg-text", { opacity: 0.05, duration: 2 })
+          tl.to(".hero-bg-text", { opacity: 0.05, duration: 0.2 })
             .to(
               ".hero-image-container",
-              { opacity: 1, y: 0, duration: 1.2 },
-              "-=1.5",
+              { opacity: 1, y: 0, duration: 0.2 },
+              "-=0.1",
             )
-            .to(".hero-badge", { opacity: 1, y: 0, duration: 0.8 }, "-=0.8")
-            .to(".hero-title", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
+            .to(".hero-badge", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1")
+            .to(".hero-title", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1")
             .to(
               ".hero-description",
-              { opacity: 1, y: 0, duration: 0.8 },
-              "-=0.6",
+              { opacity: 1, y: 0, duration: 0.2 },
+              "-=0.1",
             )
-            .to(".hero-cta", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6");
+            .to(".hero-cta", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1");
 
           // Scroll Animations
           const animateElements =
@@ -63,7 +71,7 @@ import BadriHeroImage from "../assets/images/badri-arthero.webp";
               },
               y: 0,
               opacity: 1,
-              duration: 0.8,
+              duration: 0.2,
               ease: "power3.out",
             });
           });

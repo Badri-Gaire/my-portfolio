@@ -8,9 +8,10 @@ interface Props {
   image?: ImageMetadata | string;
   link: string;
   tech?: string[];
+  placeholder?: string;
 }
 
-const { title, description, image, link, tech = [] } = Astro.props;
+const { title, description, image, link, tech = [], placeholder } = Astro.props;
 ---
 
 <a
@@ -19,7 +20,10 @@ const { title, description, image, link, tech = [] } = Astro.props;
 >
   {
     image && (
-      <div class="h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
+      <div
+        class="h-48 overflow-hidden bg-gray-100 dark:bg-gray-800 bg-cover bg-center bg-no-repeat"
+        style={placeholder ? `background-image: url(${placeholder});` : ""}
+      >
         <Image
           src={image as ImageMetadata}
           alt={title}

@@ -1,11 +1,24 @@
 ---
+import { getImage } from "astro:assets";
 import SectionHeading from "../../ui/section/SectionHeading.astro";
-import blogs from "../../../data/blogs";
+import blogsData from "../../../data/blogs";
 import { Image } from "astro:assets";
 import { ExternalLink } from "lucide-react";
 import clsx from "clsx";
 
 const { home } = Astro.props;
+
+const blogs = await Promise.all(
+  blogsData.map(async (blog) => {
+    const placeholder = await getImage({
+      src: blog.image,
+      width: 20,
+      quality: 20,
+      format: "webp",
+    });
+    return { ...blog, placeholder: placeholder.src };
+  }),
+);
 ---
 
 <div
@@ -29,7 +42,10 @@ const { home } = Astro.props;
           rel="noopener noreferrer"
           class="group relative rounded-xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 block"
         >
-          <div class="relative h-48 overflow-hidden">
+          <div
+            class="relative h-48 overflow-hidden bg-cover bg-center bg-no-repeat"
+            style={`background-image: url(${blog.placeholder});`}
+          >
             <Image
               src={blog.image}
               alt={blog.title}

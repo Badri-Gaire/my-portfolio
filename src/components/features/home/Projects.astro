@@ -1,9 +1,21 @@
 ---
+import { getImage } from "astro:assets";
 import SectionWrapper from "../../ui/section/SectionWrapper.astro";
 import SectionHeading from "../../ui/section/SectionHeading.astro";
 import ProjectCard from "../../ui/cards/ProjectCard.astro";
-import projectsData from "../../../data/projects";
-// import CustomCarousel from "../../shared/CustomCarousel";
+import projectsRawData from "../../../data/projects";
+
+const projectsData = await Promise.all(
+  projectsRawData.map(async (project) => {
+    const placeholder = await getImage({
+      src: project.image,
+      width: 20,
+      quality: 20,
+      format: "webp",
+    });
+    return { ...project, placeholder: placeholder.src };
+  }),
+);
 ---
 
 <SectionWrapper id="projects" className="py-10 lg:py-20">
