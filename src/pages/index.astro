@@ -11,15 +11,15 @@ import { getImage } from "astro:assets";
 
 const heroImage = await getImage({
   src: BadriHeroImage,
-  width: 1080,
-  format: "webp",
+  width: 600,
+  format: "avif",
 });
 
 const blurPlaceholder = await getImage({
   src: BadriHeroImage,
   width: 20,
-  quality: 20,
-  format: "webp",
+  quality: 10,
+  format: "avif",
 });
 
 const imageProps = {

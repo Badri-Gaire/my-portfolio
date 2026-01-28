@@ -1,0 +1,21 @@
+import blogImage1 from "../assets/images/blog/blog-image.webp";
+import blogImage2 from "../assets/images/blog/blog-image2.webp";
+
+export const blogsData = [
+  {
+    id: "1",
+    title: "SVGR in Astro: Convert SVGs to React Components Easily",
+    description: "Learn how to use SVGR in Astro projects to transform SVG files into React Components seamLessly. ",
+    image: blogImage1,
+    link: "https://ewanblog.com/svgr-in-astro-convert-svgs-to-react-components-easily/",
+  },
+  {
+    id: "2",
+    title: "Next.js Error Handling Guide: Managing API Errors with Axios and Fetch on Server & Client",
+    description: "A comprehensive guide on handling API error in nest.js application's using axios and fetch on both server and client sides.",
+    image: blogImage2,
+    link: "https://ewanblog.com/next-js-error-boundary-guide-managing-api-errors-with-axios-and-fetch-on-server-client/",
+  },
+];
+
+export default blogsData;

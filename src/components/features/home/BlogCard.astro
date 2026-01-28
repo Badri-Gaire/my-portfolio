@@ -1,21 +1,26 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
 import SectionHeading from "../../ui/section/SectionHeading.astro";
-import blogs from "../../../data/blogs.json";
+import blogs from "../../../data/blogs";
+import { Image } from "astro:assets";
 import { ExternalLink } from "lucide-react";
 import clsx from "clsx";
 
 const { home } = Astro.props;
 ---
 
-<div class={clsx("container px-5 py-10 lg:py-20 ", !home && "max-h-screen") } id="blog">
+<div
+  class={clsx("container px-5 py-10 lg:py-20 ", !home && "max-h-screen")}
+  id="blog"
+>
   <SectionHeading
     title="My Blog"
     subtitle="Thoughts, tutorials, and insights about web development."
   />
 
   <!-- Single blog card -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-32 max-w-6xl mx-auto">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-32 max-w-6xl mx-auto"
+  >
     {
       blogs.map((blog) => (
         <a
@@ -25,11 +30,13 @@ const { home } = Astro.props;
           class="group relative rounded-xl overflow-hidden bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 block"
         >
           <div class="relative h-48 overflow-hidden">
-            <img
+            <Image
               src={blog.image}
               alt={blog.title}
-              height={500}
               width={500}
+              height={500}
+              format="webp"
+              quality="mid"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

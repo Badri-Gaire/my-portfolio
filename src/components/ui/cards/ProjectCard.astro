@@ -20,25 +20,15 @@ const { title, description, image, link, tech = [] } = Astro.props;
   {
     image && (
       <div class="h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
-        {typeof image === "string" ? (
-          <img
-            src={image}
-            alt={title}
-            height={400}
-            width={400}
-            fetchpriority="auto"
-            class=" object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        ) : (
-          <Image
-            src={image}
-            fetchpriority="auto"
-            alt={title}
-            height={400}
-            width={400}
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        )}
+        <Image
+          src={image as ImageMetadata}
+          alt={title}
+          widths={[400, 800]}
+          sizes="(max-width: 768px) 100vw, 400px"
+          format="avif"
+          quality={80}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
     )
   }
