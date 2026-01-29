@@ -27,13 +27,19 @@ const blurPlaceholder = await getImage({
 </BaseLayout>
 
 <script>
-  // Defer GSAP loading until idle or after load
-  async function initAnimations() {
-    // Dynamic import GSAP only when we need it
-    const { gsap } = await import("gsap");
-    const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-    const { ScrollToPlugin } = await import("gsap/ScrollToPlugin");
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAnimations);
+  } else {
+    requestIdleCallback
+      ? requestIdleCallback(initAnimations)
+      : setTimeout(initAnimations, 1);
+  }
+
+  function initAnimations() {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
     // Hero Animations
@@ -81,23 +87,5 @@ const blurPlaceholder = await getImage({
         }
       });
     });
-  }
-
-  // Execution strategy
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      // Using requestIdleCallback for lower priority if supported
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(() => initAnimations());
-      } else {
-        setTimeout(() => initAnimations(), 1);
-      }
-    });
-  } else {
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(() => initAnimations());
-    } else {
-      setTimeout(() => initAnimations(), 1);
-    }
   }
 </script>
