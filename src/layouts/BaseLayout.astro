@@ -50,6 +50,8 @@ if (heroImage) {
     />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <!-- Preload image -->
     {
       heroImage && (
@@ -143,8 +145,9 @@ if (heroImage) {
     <!-- For PWA -->
     <script>
       import { registerSW } from "virtual:pwa-register";
+      // Register service worker after page load to prevent blocking the critical path
       registerSW({
-        immediate: true,
+        immediate: false,
         onRegisteredSW(
           swUrl: string,
           r: ServiceWorkerRegistration | undefined,
