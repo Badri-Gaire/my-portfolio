@@ -14,6 +14,6 @@ const { description, traits } = userData;
   </div>
 
   <div class="container mx-auto px-4 relative z-10">
-    <AboutContent client:load description={description} traits={traits} />
+    <AboutContent client:visible description={description} traits={traits} />
   </div>
 </SectionWrapper>

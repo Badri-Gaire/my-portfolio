@@ -1,7 +1,6 @@
 ---
 import { menuLinks } from "../../utils/siteConfig";
 // import ThemeToggle from "../shared/ThemeToggle.astro";
-import { Menu, X } from "lucide-react";
 ---
 
 <header
@@ -34,10 +33,38 @@ import { Menu, X } from "lucide-react";
         aria-label="Toggle Menu"
       >
         <div id="menu-icon-open" class="block">
-          <Menu className="size-6" client:idle />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-6"
+            ><line x1="4" x2="20" y1="12" y2="12"></line><line
+              x1="4"
+              x2="20"
+              y1="6"
+              y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
+          >
         </div>
         <div id="menu-icon-close" class="hidden">
-          <X className="size-6" client:idle />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-6"
+            ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+          >
         </div>
       </button>
     </div>
@@ -102,7 +129,7 @@ import { Menu, X } from "lucide-react";
           stagger: 0.05,
           duration: 0.3,
           delay: 0.1,
-        }
+        },
       );
     } else {
       // Close Menu

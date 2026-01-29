@@ -18,7 +18,11 @@ const {
 } = Astro.props;
 
 const siteUrl = siteConfig.site;
-const socialImageURL = new URL(image, siteUrl).href;
+// Ensure image path is absolute for social scrapers
+const cleanImagePath = image.startsWith("http")
+  ? image
+  : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+const socialImageURL = new URL(cleanImagePath).href;
 /**Automatically shows canonical url in others pages */
 const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
 
@@ -170,7 +174,8 @@ if (type === "article" && publishDate) {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialImageURL} />
-<meta name="twitter:creator" content={`@${siteConfig.author}`} />
+<meta name="twitter:site" content={siteConfig.twitterHandle} />
+<meta name="twitter:creator" content={siteConfig.twitterHandle} />
 <!-- for google-bot -->
 <meta
   name="robots"

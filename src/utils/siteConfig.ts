@@ -1,6 +1,5 @@
 export const siteConfig = {
-  title:
-    "Badri Gaire - Frontend Developer ",
+  title: "Badri Gaire - Frontend Developer",
   description:
     "Professional website developer in Bhairahawa and Butwal, Nepal. Specializing in modern framework like React, Next.js, Astro, and Tailwind CSS.",
   lang: "en-US",
@@ -11,6 +10,7 @@ export const siteConfig = {
     "https://github.com/Badri-Gaire",
   ],
   gaId: "G-QJ0ZE2JK62",
+  twitterHandle: "@BadriGaire", // Replace with your actual handle if different
 };
 
 export const menuLinks = [
