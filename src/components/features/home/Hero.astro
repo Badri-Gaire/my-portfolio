@@ -23,25 +23,29 @@ const { placeholder } = Astro.props;
   <div
     class="hero-bg-text absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-[0.03] dark:opacity-[0.05]"
   >
-    <h2
+    <div
       class="text-[8vw] font-black uppercase tracking-tighter whitespace-nowrap"
     >
       Frontend Developer
-    </h2>
+    </div>
   </div>
 
   <div class="container mx-auto px-4 z-10">
     <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
       {/* Text Content */}
       <div class="flex-1 space-y-8 order-2 lg:order-1 text-center lg:text-left">
+        <h1 class="sr-only">
+          Freelance Website Developer & Frontend Developer in Bhairahawa,
+          Butwal, Rupandehi, Nepal
+        </h1>
         <div class="space-y-4">
-          <h1
+          <div
             class="hero-title text-4xl md:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-foreground opacity-0"
           >
             Building digital <br />
             <span class="text-primary italic">experiences</span> that <br />
             inspire & convert.
-          </h1>
+          </div>
         </div>
 
         <p
@@ -75,7 +79,7 @@ const { placeholder } = Astro.props;
             alt="Badri Gaire"
             width={600}
             height={750}
-            format="avif"
+            format="webp"
             quality={90}
             loading="eager"
             fetchpriority="high"
