@@ -1,43 +1,60 @@
-# Astro Starter Kit: Minimal
+# Badri Gaire - Portfolio
 
-```sh
-yarn create astro@latest -- --template minimal
-```
+A modern, high-performance portfolio website built with **Astro**, **React**, and **Tailwind CSS**. Optimized for speed, local SEO, and seamless user experience.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Key Features
 
-## 🚀 Project Structure
+- **PWA Ready:** Progressive Web App support with offline caching and service worker integration.
+- **Local SEO:** Targeted optimization for "Frontend Developer in Bhairahawa & Butwal" with proper `<h1>` hierarchy and metadata.
+- **Advanced Performance:**
+  - **Smart Prefetching:** Uses `hover` strategy to load pages only when users intend to click, saving massive bandwidth (down from 4.2MB to <1MB initial load).
+  - **Optimal Hydration:** React components use `client:visible` to only load JavaScript when they enter the viewport.
+  - **Astro Image Optimization:** High-quality, optimized images using `<Image />` component and Avif/WebP formats.
+- **Analytics & Tracking:** Built-in integration for Google Analytics and Google Search Console.
+- **Specialized Services:** Dedicated page for Technical Services including Ecommerce (Multi-tenant & Single-store) and performance consulting.
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Tech Stack
+
+- **Framework:** [Astro](https://astro.build/)
+- **UI Architecture:** [React](https://reactjs.org/) (Islands Architecture)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://gsap.com/)
+- **Icons:** [Lucide React](https://lucide.dev/) & [Skill Icons](https://skillicons.dev/)
+
+## 📁 Project Structure
 
 ```text
 /
-├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/       # Optimized images and styles
+│   ├── components/   # Astro and React components
+│   │   ├── features/ # Feature-specific logic (Home, Services)
+│   │   └── ui/       # Shared UI components
+│   ├── data/         # JSON/TS data files for easy content updates
+│   ├── layouts/      # Base layouts for consistent structure
+│   └── pages/        # File-based routing (proper URLs used)
+├── public/           # Static assets (favicons, manifests)
+└── astro.config.mjs  # Core project configuration
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🌍 Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Deployed using **Cloudflare Pages/Workers** for maximum speed and global distribution.
 
-Any static assets, like images, can be placed in the `public/` directory.
+```sh
+# Install dependencies
+yarn install
 
-## 🧞 Commands
+# Start local development
+yarn dev
 
-All commands are run from the root of the project, from a terminal:
+# Build for production
+yarn build
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `yarn install`             | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
+# Preview production build
+yarn preview
+```
 
-## 👀 Want to learn more?
+## ⚙️ Configuration
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Centralized configuration is available in `src/utils/siteConfig.ts` and `src/data/`. Content updates for Experience, Projects, and Personal Info can be made directly in the `src/data/` folder.

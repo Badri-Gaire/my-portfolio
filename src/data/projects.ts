@@ -6,7 +6,7 @@ export const projectsData = [
   {
     title: "Wrappers Wrap",
     description: "An eCommerce website focused on selling mobile covers with a modern, responsive, and user-friendly shopping experience.",
-    link: "#",
+    link: "https://www.wrapperswrap.com/",
     tech: ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
     image: wrappersStore,
   },

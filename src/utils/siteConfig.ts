@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: "Badri Gaire - Frontend Developer",
+  title: "Badri Gaire - Frontend Developer in Bhairahawa & Butwal",
   description:
     "Professional website developer in Bhairahawa and Butwal, Nepal. Specializing in modern framework like React, Next.js, Astro, and Tailwind CSS.",
   lang: "en-US",
@@ -20,15 +20,19 @@ export const menuLinks = [
   },
   {
     title: "About",
-    path: "#about",
+    path: "/about",
   },
   {
     title: "Projects",
-    path: "#projects",
+    path: "/projects",
+  },
+  {
+    title: "Skills",
+    path: "/website-developer",
   },
   {
     title: "Blog",
-    path: "#blog",
+    path: "/blog",
   },
   {
     title: "Contact",

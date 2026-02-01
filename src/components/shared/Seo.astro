@@ -128,6 +128,9 @@ if (type === "article" && publishDate) {
 }
 ---
 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta
@@ -137,9 +140,6 @@ if (type === "article" && publishDate) {
 <meta name="author" content={siteConfig.author} />
 <!-- canonical url -->
 <link rel="canonical" href={canonicalURL} />
-
-<meta charset="utf-8" />
-<meta name="referrer" content="strict-origin-when-cross-origin" />
 <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
 <link rel="shortcut icon" href="/favicon.ico" />
@@ -153,8 +153,7 @@ if (type === "article" && publishDate) {
   content="black-translucent"
 />
 <link rel="manifest" href="/site.webmanifest" />
-<!-- For Responsive -->
-<meta name="viewport" content="width=device-width" />
+
 <!-- Astro version -->
 <meta name="generator" content={Astro.generator} />
 <!-- Open Graph / Facebook / Instagram / WhatsApp -->

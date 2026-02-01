@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionWrapper from "../../components/ui/section/SectionWrapper.astro";
+import SectionHeading from "../../components/ui/section/SectionHeading.astro";
+import BadriHeroImage from "../../assets/images/badri-arthero.webp";
+
+const expertise = [
+    {
+        title: "Ecommerce Expert",
+        description:
+            "Expertise in building both single-store solutions like Wrappers Wrap and complex multi-tenant systems like Lets-do.",
+        icon: "🛍️",
+    },
+    {
+        title: "Deployment & Cloud",
+        description:
+            "Experience deploying modern Astro and React projects using Cloudflare Pages and Workers.",
+        icon: "☁️",
+    },
+    {
+        title: "Performance & SEO",
+        description:
+            "Optimizing Core Web Vitals using PageSpeed Insights to ensure lightning-fast load times and high rankings.",
+        icon: "⚡",
+    },
+    {
+        title: "Modern Frameworks",
+        description:
+            "Expert in Next.js and Astro, building modern, static, and server-side rendered applications.",
+        icon: "🚀",
+    },
+    {
+        title: "Search & Analytics",
+        description:
+            "Setting up Google Search Console and Google Analytics to monitor traffic and technical site health.",
+        icon: "📊",
+    },
+    {
+        title: "Project Guidance",
+        description:
+            "Guiding interns and junior developers in mastering modern web technologies like Next.js.",
+        icon: "🎓",
+    },
+];
+---
+
+<BaseLayout
+    title="Website Developer & Performance Expert - Badri Gaire"
+    heroImage={BadriHeroImage}
+>
+    <SectionWrapper className="py-20">
+        <div class="max-w-4xl mx-auto text-center mb-16 px-4">
+            <SectionHeading title="Website Development Services" />
+            <p class="text-xl text-muted-foreground mt-6 leading-relaxed">
+                I specialize in building modern, high-performance websites that
+                excel in speed, SEO, and user experience. My focus is on
+                delivering business value through technology.
+            </p>
+        </div>
+
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {
+                    expertise.map((item) => (
+                        <div class="group p-6 rounded-2xl bg-white/50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                                {item.icon}
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">{item.title}</h3>
+                            <p class="text-muted-foreground text-sm leading-relaxed">
+                                {item.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </SectionWrapper>
+</BaseLayout>

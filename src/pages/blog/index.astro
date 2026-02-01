@@ -1,22 +1,11 @@
 ---
-import { getCollection } from "astro:content";
-import PageLayout from "../../components/layout/PageLayout.astro";
-import BlogCard from "../../components/ui/cards/BlogCard.astro";
-
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
-);
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/features/home/BlogCard.astro";
+import BadriHeroImage from "../../assets/images/badri-arthero.webp";
 ---
 
-<PageLayout title="Blog" description="Thinking out loud.">
-  <div class="grid md:grid-cols-2 gap-6">
-    {posts.map((post) => (
-      <BlogCard 
-        title={post.data.title}
-        description={post.data.description}
-        date={post.data.publishDate}
-        slug={post.slug}
-      />
-    ))}
+<BaseLayout title="Blog - Badri Gaire" heroImage={BadriHeroImage}>
+  <div class="py-12">
+    <BlogCard home="false" />
   </div>
-</PageLayout>
+</BaseLayout>

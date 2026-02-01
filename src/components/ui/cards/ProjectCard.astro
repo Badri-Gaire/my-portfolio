@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import { ExternalLink } from "lucide-react";
 
 interface Props {
   title: string;
@@ -12,16 +13,19 @@ interface Props {
 }
 
 const { title, description, image, link, tech = [], placeholder } = Astro.props;
+const isExternal = link.startsWith("http");
 ---
 
 <a
   href={link}
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   class="group block border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-gray-900"
 >
   {
     image && (
       <div
-        class="h-48 overflow-hidden bg-gray-100 dark:bg-gray-800 bg-cover bg-center bg-no-repeat"
+        class="h-48 overflow-hidden bg-gray-100 dark:bg-gray-800 bg-cover bg-center bg-no-repeat relative"
         style={placeholder ? `background-image: url(${placeholder});` : ""}
       >
         <Image
@@ -33,14 +37,26 @@ const { title, description, image, link, tech = [], placeholder } = Astro.props;
           quality={80}
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
+        {isExternal && (
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="inline-flex items-center gap-2 px-4 py-2 bg-white text-gray-900 rounded-full font-medium transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+              Visit Site <ExternalLink className="w-4 h-4" />
+            </span>
+          </div>
+        )}
       </div>
     )
   }
   <div class="p-6">
     <h3
-      class="text-xl font-bold mb-2 group-hover:text-primary transition-colors text-gray-900 dark:text-white"
+      class="text-xl font-bold mb-2 group-hover:text-primary transition-colors text-gray-900 dark:text-white flex items-center gap-2"
     >
       {title}
+      {
+        isExternal && (
+          <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+        )
+      }
     </h3>
     <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
       {description}

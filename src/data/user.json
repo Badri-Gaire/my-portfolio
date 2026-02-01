@@ -2,7 +2,7 @@
     "name": "Badri Gaire",
     "role": "Frontend Developer",
     "summary": "I am a Frontend Developer based in Bhairahawa, Nepal. I enjoy learning, improving my skills, and building clean, interactive, and well-performing websites.",
-    "description": "I have hands-on experience working with modern frontend technologies like React, Next.js, TypeScript, Tailwind CSS, and Astro. I am naturally curious, enjoy exploring new tools and patterns, and believe in continuous learning to improve both code quality and user experience. I specialize in providing high-performance web solutions for businesses in Bhairahawa, Butwal, and the Rupandehi district.",
+    "description": "I have hands-on experience working with modern frontend technologies like React, Next.js, TypeScript, Tailwind CSS, and Astro. I am naturally curious, enjoy exploring new tools and patterns, and believe in continuous learning to improve both code quality and user experience.",
     "skills": [
         "React",
         "Next.js",
@@ -16,8 +16,8 @@
     ],
     "traits": [
         "User-focused",
-        "Responsive UI enthusiast",
-        "Curious learner",
-        "Continuously improving"
+        "Core Web Vitals",
+        "SEO Optimization",
+        "Curious learner"
     ]
 }
