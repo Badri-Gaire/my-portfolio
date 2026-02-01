@@ -19,3 +19,4 @@ export const blogsData = [
 ];
 
 export default blogsData;
+
