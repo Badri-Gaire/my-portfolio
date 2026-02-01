@@ -95,20 +95,31 @@ if (heroImage) {
       }
     </style>
 
-    <!-- Google tag (gtag.js) -->
-    <script
-      is:inline
-      async
-      src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.gaId}`}
-    ></script>
+    <!-- Defer non-critical scripts -->
     <script is:inline define:vars={{ gaId: siteConfig.gaId }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+      function loadGA() {
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+        document.head.appendChild(script);
 
-      gtag("config", gaId);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", gaId);
+      }
+
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(() => {
+          setTimeout(loadGA, 1000);
+        });
+      } else {
+        window.addEventListener("load", () => {
+          setTimeout(loadGA, 2000);
+        });
+      }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" /><link
       rel="preconnect"

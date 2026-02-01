@@ -5,7 +5,7 @@ import { ArrowUp } from "lucide-react";
 <button
     id="scroll-to-top"
     aria-label="Scroll to Top"
-    class="fixed bottom-10 right-8 h-12 w-8 flex items-center justify-center rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200 shadow-lg transition-all duration-500 transform translate-y-20 opacity-0 z-50 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 hover:shadow-xl group"
+    class="fixed bottom-10 right-8 h-12 w-12 flex items-center justify-center rounded-full bg-white/10 dark:bg-black/20 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200 shadow-lg transition-all duration-500 transform translate-y-20 opacity-0 z-50 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 hover:shadow-xl group"
 >
     <div class="relative h-full w-full flex items-center justify-center">
         <ArrowUp
@@ -16,25 +16,30 @@ import { ArrowUp } from "lucide-react";
 
 <script>
     function initScrollToTop() {
-        const scrollToTopBtn = document.getElementById("scroll-to-top") as HTMLButtonElement | null;
+        const scrollToTopBtn = document.getElementById(
+            "scroll-to-top",
+        ) as HTMLButtonElement | null;
         if (!scrollToTopBtn) return;
 
         let isVisible = false;
         let ticking = false;
-        
+
         const toggleVisibility = () => {
             const shouldShow = window.scrollY > 300;
-            
+
             if (shouldShow !== isVisible) {
                 isVisible = shouldShow;
-                
+
                 if (shouldShow) {
-                    scrollToTopBtn.classList.remove("translate-y-20", "opacity-0");
+                    scrollToTopBtn.classList.remove(
+                        "translate-y-20",
+                        "opacity-0",
+                    );
                 } else {
                     scrollToTopBtn.classList.add("translate-y-20", "opacity-0");
                 }
             }
-            
+
             ticking = false;
         };
 
@@ -54,13 +59,13 @@ import { ArrowUp } from "lucide-react";
 
         window.addEventListener("scroll", onScroll, { passive: true });
         scrollToTopBtn.addEventListener("click", scrollToTop);
-        
+
         // Check initial position
         toggleVisibility();
     }
 
     //  Defer initialization
-    if ('requestIdleCallback' in window) {
+    if ("requestIdleCallback" in window) {
         requestIdleCallback(initScrollToTop, { timeout: 2000 });
     } else {
         setTimeout(initScrollToTop, 2000);

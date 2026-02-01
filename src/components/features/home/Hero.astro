@@ -18,6 +18,7 @@ const { placeholder } = Astro.props;
 <SectionWrapper
   className="relative flex flex-col items-center justify-center min-h-[calc(100vh-80px)] overflow-hidden"
   id="home"
+  tagName="div"
 >
   {/* Large Background Text */}
   <div
@@ -40,7 +41,7 @@ const { placeholder } = Astro.props;
         </h1>
         <div class="space-y-4">
           <div
-            class="hero-title text-4xl md:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-foreground opacity-0"
+            class="hero-title text-4xl md:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-foreground"
           >
             Building digital <br />
             <span class="text-primary italic">experiences</span> that <br />
@@ -49,17 +50,15 @@ const { placeholder } = Astro.props;
         </div>
 
         <p
-          class="hero-description text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 opacity-0"
+          class="hero-description text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0"
         >
           {summary}
         </p>
 
         <div
-          class="hero-cta flex flex-wrap justify-center lg:justify-start items-center gap-6 pt-4 opacity-0"
+          class="hero-cta flex flex-wrap justify-center lg:justify-start items-center gap-6 pt-4"
         >
-          <JellyButton client:visible href="#projects">
-            See my works
-          </JellyButton>
+          <JellyButton client:idle href="#projects"> See my works </JellyButton>
           <div class="social-hero">
             <SocialLinks />
           </div>
@@ -67,9 +66,7 @@ const { placeholder } = Astro.props;
       </div>
 
       {/* Hero Image */}
-      <div
-        class="flex-1 order-1 lg:order-2 hero-image-container relative opacity-0"
-      >
+      <div class="flex-1 order-1 lg:order-2 hero-image-container relative">
         <div
           class="relative w-full max-w-md mx-auto aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-cover bg-center bg-no-repeat"
           style={placeholder ? `background-image: url(${placeholder});` : ""}
@@ -109,5 +106,65 @@ const { placeholder } = Astro.props;
 <style>
   .italic {
     font-style: italic;
+  }
+
+  /* Reveal Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .hero-title,
+  .hero-description,
+  .hero-cta,
+  .hero-image-container {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .hero-title {
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+  .hero-description {
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+  .hero-cta {
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+  .hero-image-container {
+    animation: scaleIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+
+  .hero-bg-text {
+    animation: fadeIn 1.2s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.05;
+    }
   }
 </style>

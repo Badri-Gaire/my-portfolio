@@ -27,32 +27,18 @@ const blurPlaceholder = await getImage({
 </BaseLayout>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+  async function initAnimations() {
+    const [{ gsap }, { ScrollTrigger }, { ScrollToPlugin }] = await Promise.all(
+      [
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+        import("gsap/ScrollToPlugin"),
+      ],
+    );
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAnimations);
-  } else {
-    requestIdleCallback
-      ? requestIdleCallback(initAnimations)
-      : setTimeout(initAnimations, 1);
-  }
-
-  function initAnimations() {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    // Hero Animations
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-    tl.to(".hero-bg-text", { opacity: 0.05, duration: 0.2 })
-      .to(".hero-image-container", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1")
-      .to(".hero-badge", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1")
-      .to(".hero-title", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1")
-      .to(".hero-description", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1")
-      .to(".hero-cta", { opacity: 1, y: 0, duration: 0.2 }, "-=0.1");
-
-    // Scroll Animations
+    // Scroll Animations for elements with .animate-on-scroll
     const animateElements = document.querySelectorAll(".animate-on-scroll");
     animateElements.forEach((element) => {
       gsap.to(element, {
@@ -63,12 +49,12 @@ const blurPlaceholder = await getImage({
         },
         y: 0,
         opacity: 1,
-        duration: 0.2,
+        duration: 0.6,
         ease: "power3.out",
       });
     });
 
-    // Smooth scroll
+    // Smooth scroll for anchors
     const anchors = document.querySelectorAll('a[href^="#"]');
     anchors.forEach((anchor) => {
       anchor.addEventListener("click", (e) => {
@@ -87,5 +73,18 @@ const blurPlaceholder = await getImage({
         }
       });
     });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(initAnimations, 100);
+    });
+  } else {
+    // defer even more if already loaded
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => initAnimations());
+    } else {
+      setTimeout(initAnimations, 200);
+    }
   }
 </script>

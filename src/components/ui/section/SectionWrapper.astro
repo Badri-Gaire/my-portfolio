@@ -4,13 +4,15 @@ import Container from "../../shared/Container.astro";
 interface Props {
   className?: string;
   id?: string;
+  tagName?: string;
 }
 
-const { className = "", id } = Astro.props;
+const { className = "", id, tagName = "section" } = Astro.props;
+const Tag = tagName as any;
 ---
 
-<section id={id} class={`py-5 ${className}`}>
+<Tag id={id} class={`py-5 ${className}`}>
   <Container>
     <slot />
   </Container>
-</section>
+</Tag>

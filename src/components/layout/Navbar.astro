@@ -94,8 +94,6 @@ import { menuLinks } from "../../utils/siteConfig";
 <div class="h-15"></div>
 
 <script>
-  import { gsap } from "gsap";
-
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   const iconOpen = document.getElementById("menu-icon-open");
@@ -104,7 +102,8 @@ import { menuLinks } from "../../utils/siteConfig";
 
   let isMenuOpen = false;
 
-  const toggleMenu = () => {
+  const toggleMenu = async () => {
+    const { gsap } = await import("gsap");
     isMenuOpen = !isMenuOpen;
 
     if (isMenuOpen) {
@@ -114,7 +113,7 @@ import { menuLinks } from "../../utils/siteConfig";
 
       gsap.to(mobileMenu, {
         duration: 0.3,
-        autoAlpha: 1, // handles opacity and visibility
+        autoAlpha: 1,
         y: 0,
         ease: "power2.out",
         display: "block",
@@ -147,14 +146,12 @@ import { menuLinks } from "../../utils/siteConfig";
 
   menuToggle?.addEventListener("click", toggleMenu);
 
-  // Close menu when a link is clicked
   mobileLinks.forEach((link) => {
     link.addEventListener("click", () => {
       if (isMenuOpen) toggleMenu();
     });
   });
 
-  // Handle resize to reset state if moving to desktop
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 768 && isMenuOpen) {
       toggleMenu();
