@@ -5,13 +5,7 @@ A modern, high-performance portfolio website built with **Astro**, **React**, an
 ## 🚀 Key Features
 
 - **PWA Ready:** Progressive Web App support with offline caching and service worker integration.
-- **Local SEO:** Targeted optimization for "Frontend Developer in Bhairahawa & Butwal" with proper `<h1>` hierarchy and metadata.
-- **Advanced Performance:**
-  - **Smart Prefetching:** Uses `hover` strategy to load pages only when users intend to click, saving massive bandwidth (down from 4.2MB to <1MB initial load).
-  - **Optimal Hydration:** React components use `client:visible` to only load JavaScript when they enter the viewport.
-  - **Astro Image Optimization:** High-quality, optimized images using `<Image />` component and Avif/WebP formats.
-- **Analytics & Tracking:** Built-in integration for Google Analytics and Google Search Console.
-- **Specialized Services:** Dedicated page for Technical Services including Ecommerce (Multi-tenant & Single-store) and performance consulting.
+
 
 ## 🛠️ Tech Stack
 
