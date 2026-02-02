@@ -25,7 +25,7 @@ const { placeholder } = Astro.props;
     class="hero-bg-text absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-[0.03] dark:opacity-[0.05]"
   >
     <div
-      class="text-[8vw] font-black uppercase tracking-tighter whitespace-nowrap"
+      class="text-[8vw] text-black/5 dark:text-white font-black uppercase tracking-tighter whitespace-nowrap"
     >
       Frontend Developer
     </div>
@@ -68,7 +68,7 @@ const { placeholder } = Astro.props;
       {/* Hero Image */}
       <div class="flex-1 order-1 lg:order-2 hero-image-container relative">
         <div
-          class="relative w-full max-w-md mx-auto aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-cover bg-center bg-no-repeat"
+          class="relative w-full max-w-md mx-auto aspect-4/5 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-cover bg-center bg-no-repeat"
           style={placeholder ? `background-image: url(${placeholder});` : ""}
         >
           <Image
@@ -80,7 +80,7 @@ const { placeholder } = Astro.props;
             quality={90}
             loading="eager"
             fetchpriority="high"
-            class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700 scale-105"
+            class="w-full h-full object-cover grayscale-20 hover:grayscale-0 transition-all duration-700 scale-105"
           />
           <div
             class="absolute inset-0 bg-linear-to-t from-background/40 to-transparent"
