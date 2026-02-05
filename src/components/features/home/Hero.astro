@@ -5,7 +5,6 @@ import JellyButton from "../../ui/buttons/JellyButton";
 import SocialLinks from "../../shared/SocialLinks.astro";
 import userData from "../../../data/user.json";
 import heroImage from "../../../assets/images/badri-arthero.webp";
-import blurImage from "../../../assets/images/badri-blur.webp";
 
 const { summary } = userData;
 ---
@@ -20,23 +19,9 @@ const { summary } = userData;
     class="absolute inset-0 pointer-events-none select-none overflow-hidden"
     aria-hidden="true"
   >
-    {/* Central Atmospheric Glow */}
-    <div
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square opacity-20 dark:opacity-[0.15] blur-[150px] animate-pulse-slow"
-    >
-      <Image src={blurImage} alt="" class="w-full h-full object-contain" />
-    </div>
-
-    {/* Bottom Reflection */}
-    <div
-      class="absolute -bottom-[20%] left-1/2 -translate-x-1/2 w-full max-w-2xl aspect-square opacity-30 dark:opacity-40 blur-[100px] rotate-180 scale-x-150"
-    >
-      <Image src={blurImage} alt="" class="w-full h-full object-contain" />
-    </div>
-
     {/* Subtle Grid Pattern Overlay */}
     <div
-      class="absolute inset-0 bg-[radial-gradient(#80808015_1px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"
+      class="absolute inset-0 bg-[radial-gradient(#80808015_5px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"
     >
     </div>
   </div>
@@ -144,7 +129,6 @@ const { summary } = userData;
       </div>
     </div>
   </div>
-
 </SectionWrapper>
 
 <style>
