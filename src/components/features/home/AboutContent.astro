@@ -1,0 +1,45 @@
+---
+interface Props {
+    description: string;
+    traits: string[];
+}
+
+const { description, traits } = Astro.props;
+---
+
+<div class="mb-16 animate-on-scroll opacity-0 translate-y-12">
+    {/* Title */}
+    <div class="text-center mb-12 max-w-3xl mx-auto">
+        <h2
+            class="text-5xl md:text-7xl font-black bg-clip-text text-transparent bg-linear-to-r from-orange-500 to-black dark:from-blue-300 dark:to-blue-500 mb-6"
+        >
+            About Me
+        </h2>
+
+        {/* Description */}
+        <p
+            class="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-medium"
+        >
+            {description}
+        </p>
+    </div>
+
+    {/* Traits as Badges */}
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+        {
+            traits.map((trait) => (
+                <div class="group relative trait-badge opacity-0 translate-y-8">
+                    <div class="absolute inset-0 bg-linear-to-r from-indigo-600 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+                    <span class="relative px-6 py-3 min-w-52 text-nowrap text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-gray-700 rounded-full text-sm font-semibold transition-all group-hover:border-indigo-600 dark:group-hover:border-indigo-400 group-hover:shadow-xl group-hover:shadow-indigo-500/20 block hover:scale-105 hover:-translate-y-1">
+                        {trait}
+                    </span>
+                </div>
+            ))
+        }
+    </div>
+</div>
+
+<script>
+    // Handled by GSAP in index.astro for .animate-on-scroll
+    // Staggered badges can be handled here if needed, or by adding a generic stagger class
+</script>

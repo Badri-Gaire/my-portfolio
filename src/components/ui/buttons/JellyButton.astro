@@ -1,0 +1,54 @@
+---
+interface Props {
+    href?: string;
+    variant?: "primary" | "outline";
+    className?: string;
+}
+
+const { href, variant = "primary", className = "" } = Astro.props;
+
+const isPrimary = variant === "primary";
+const Tag = href ? "a" : "button";
+
+const baseStyles =
+    "relative px-8 py-3 rounded-full font-semibold transition-all duration-300 inline-block overflow-hidden group";
+const variantStyles = isPrimary
+    ? "bg-gradient-to-r from-orange-500 to-black dark:from-blue-400 dark:to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+    : "border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 active:scale-95";
+---
+
+<Tag href={href} class:list={[baseStyles, variantStyles, className]}>
+    <span class="relative z-10 inline-block group-hover:animate-jelly">
+        <slot />
+    </span>
+</Tag>
+
+<style>
+    @keyframes jelly {
+        0% {
+            transform: scale(1, 1);
+        }
+        30% {
+            transform: scale(1.25, 0.75);
+        }
+        40% {
+            transform: scale(0.75, 1.25);
+        }
+        50% {
+            transform: scale(1.15, 0.85);
+        }
+        65% {
+            transform: scale(0.95, 1.05);
+        }
+        75% {
+            transform: scale(1.05, 0.95);
+        }
+        100% {
+            transform: scale(1, 1);
+        }
+    }
+
+    .animate-jelly {
+        animation: jelly 0.6s ease-in-out;
+    }
+</style>

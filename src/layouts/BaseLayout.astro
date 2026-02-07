@@ -31,9 +31,8 @@ let optimizedSrc: string | undefined;
 if (heroImage) {
   const optimized = await getImage({
     src: heroImage,
-    width: 768,
+    width: 800,
     format: "webp",
-    placeholder: "blur",
   });
   optimizedSrc = optimized.src;
 }
@@ -83,7 +82,6 @@ if (heroImage) {
           "Open Sans",
           "Helvetica Neue",
           sans-serif;
-      }
       }
 
       /* Optional: Add smooth scroll behavior */

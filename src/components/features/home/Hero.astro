@@ -52,10 +52,10 @@ const { summary } = userData;
               <Image
                 src={heroImage}
                 alt="Badri Gaire"
-                width={800}
-                height={1000}
+                widths={[400, 600, 800]}
+                sizes="(max-width: 1024px) 320px, 800px"
                 format="webp"
-                quality={100}
+                quality={80}
                 loading="eager"
                 fetchpriority="high"
                 class="w-full h-full object-cover grayscale-[0.2] contrast-125 group-hover:grayscale-0 transition-all duration-1000"
@@ -122,7 +122,9 @@ const { summary } = userData;
         >
           <JellyButton client:idle href="#projects"> See my works </JellyButton>
 
-          <div class="social-hero lg:border-l lg:border-white/10 lg:pl-10 flex gap-6">
+          <div
+            class="social-hero lg:border-l lg:border-white/10 lg:pl-10 flex gap-6"
+          >
             <SocialLinks />
           </div>
         </div>
