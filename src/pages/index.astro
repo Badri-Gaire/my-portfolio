@@ -6,6 +6,7 @@ import About from "../components/features/home/About.astro";
 import Experience from "../components/features/home/Experience.astro";
 import Projects from "../components/features/home/Projects.astro";
 import BlogCard from "../components/features/home/BlogCard.astro";
+import ScrollAnimations from "../components/shared/ScrollAnimations";
 const BadriHeroImage = (await import("../assets/images/badri-arthero.webp"))
   .default;
 ---
@@ -19,65 +20,4 @@ const BadriHeroImage = (await import("../assets/images/badri-arthero.webp"))
   <About />
 </BaseLayout>
 
-<script>
-  async function initAnimations() {
-    const [{ gsap }, { ScrollTrigger }, { ScrollToPlugin }] = await Promise.all(
-      [
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-        import("gsap/ScrollToPlugin"),
-      ],
-    );
-
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-    // Scroll Animations for elements with .animate-on-scroll
-    const animateElements = document.querySelectorAll(".animate-on-scroll");
-    animateElements.forEach((element) => {
-      gsap.to(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power3.out",
-      });
-    });
-
-    // Smooth scroll for anchors
-    const anchors = document.querySelectorAll('a[href^="#"]');
-    anchors.forEach((anchor) => {
-      anchor.addEventListener("click", (e) => {
-        e.preventDefault();
-        const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute(
-          "href",
-        );
-        if (!targetId || targetId === "#") return;
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          gsap.to(window, {
-            duration: 1,
-            scrollTo: { y: targetElement, offsetY: 80 },
-            ease: "power2.inOut",
-          });
-        }
-      });
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(initAnimations, 100);
-    });
-  } else {
-    // defer even more if already loaded
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(() => initAnimations());
-    } else {
-      setTimeout(initAnimations, 200);
-    }
-  }
-</script>
+<ScrollAnimations client:idle />
