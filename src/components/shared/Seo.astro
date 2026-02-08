@@ -34,7 +34,7 @@ const jsonLD: { "@context": string; "@graph": any[] } = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: siteConfig.title,
-      description: siteConfig.description,
+      description: `Badri Gaire is an expert Software and Website Developer based in Bhairahawa, Rupandehi, Nepal. Providing custom web development and SEO services at Bhairahawa and surrounding areas.`,
       publisher: {
         "@id": `${siteUrl}/#person`,
       },
@@ -44,7 +44,7 @@ const jsonLD: { "@context": string; "@graph": any[] } = {
       "@id": `${siteUrl}/#person`,
       name: siteConfig.author,
       url: siteUrl,
-      jobTitle: "Frontend Developer",
+      jobTitle: "Software & Website Developer",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Bhairahawa",
@@ -135,7 +135,7 @@ if (type === "article" && publishDate) {
 <meta name="description" content={description} />
 <meta
   name="keywords"
-  content="Website Developer in Bhairahawa, Frontend Developer in Butwal, Web Developer Rupandehi, Badri Gaire, React, Nextjs, Astro, Typescript, Tailwind Css, Seo Optimization, High performance website development, Nepal"
+  content="Website Developer at Bhairahawa, Web Developer in Bhairahawa, Software Developer from Bhairahawa, Website Developer of Nepal, Software & Web Developer Rupandehi, Badri Gaire, Web Developer Nepal, Software Engineer at Rupandehi, React, Nextjs, Astro, Typescript, Tailwind Css, Seo Optimization, High performance web development"
 />
 <meta name="author" content={siteConfig.author} />
 <!-- canonical url -->

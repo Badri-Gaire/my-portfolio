@@ -1,7 +1,7 @@
 export const siteConfig = {
-  title: "Badri Gaire - Frontend Developer in Bhairahawa & Butwal",
+  title: "Badri Gaire | Software & Web Developer | Bhairahawa, Rupandehi, Nepal",
   description:
-    "Professional website developer in Bhairahawa and Butwal, Nepal. Specializing in modern framework like React, Next.js, Astro, and Tailwind CSS.",
+    "Badri Gaire is a professional Software and Website Developer based in Bhairahawa, Rupandehi, Nepal. Specializing in high-performance website development, SEO, and modern web applications at Bhairahawa and Butwal.",
   lang: "en-US",
   author: "Badri",
   site: "https://www.badrigaire.com.np",
